@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="16dp"
+    android:background="#FFFFFF">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="TOTAL"
+        android:textSize="18sp"
+        android:textColor="#000000"/>
+
+    <TextView
+        android:id="@+id/total"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="VND :"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        android:textColor="#000000"
+        android:layout_marginTop="8dp"/>
+
+    <!-- Thông tin khách hàng -->
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Customer Information"
+        android:textSize="16sp"
+        android:textColor="#000000"
+        android:layout_marginTop="16dp"/>
+
+    <EditText
+        android:id="@+id/customer_name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint=" your name"
+        android:padding="8dp"
+        android:layout_marginTop="8dp"
+        android:minHeight="80dp"/>
+
+    <EditText
+        android:id="@+id/customer_phone"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint=" your phone number"
+        android:padding="8dp"
+        android:inputType="phone"
+        android:layout_marginTop="8dp"
+        android:minHeight="80dp"/>
+
+    <EditText
+        android:id="@+id/customer_address"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint=" your address"
+        android:padding="8dp"
+        android:layout_marginTop="8dp"
+        android:minHeight="80dp"
+        />
+
+    <!-- Nút Checkout -->
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="CHECKOUT"
+        android:layout_marginTop="16dp"/>
+
+</LinearLayout>

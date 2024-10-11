@@ -13,3 +13,12 @@
 .externalNativeBuild
 .cxx
 local.properties
+.idea/compiler.xml
+.idea/deploymentTargetSelector.xml
+.idea/gradle.xml
+.idea/migrations.xml
+.idea/misc.xml
+.idea/vcs.xml
+gradle/libs.versions.toml
+/gradle
+gradle/libs.versions.toml
