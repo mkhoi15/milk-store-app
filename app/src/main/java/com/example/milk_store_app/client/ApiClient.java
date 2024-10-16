@@ -17,13 +17,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class ApiClient {
     private Retrofit retrofit;
 
-    private final Context context;
-
-    public ApiClient(Context context) {
-        this.context = context;
-    }
-
-    private Retrofit createRetrofit() {
+    private Retrofit createRetrofit(Context context) {
         if (retrofit == null) {
             retrofit = new Retrofit.Builder()
                 .baseUrl(Constants.BASE_URL)
@@ -42,7 +36,7 @@ public class ApiClient {
             .build();
     }
 
-    public AuthService getAuthService() {
-        return createRetrofit().create(AuthService.class);
+    public AuthService getAuthService(Context context) {
+        return createRetrofit(context).create(AuthService.class);
     }
 }
