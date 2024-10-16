@@ -7,18 +7,12 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.graphics.Insets;
-import androidx.core.view.ViewCompat;
-import androidx.core.view.WindowInsetsCompat;
 
-import com.example.milk_store_app.client.ApiClient;
 import com.example.milk_store_app.models.request.LoginRequest;
-import com.example.milk_store_app.models.response.LoginResponse;
 import com.example.milk_store_app.repository.AuthRepository;
 import com.example.milk_store_app.services.AuthService;
 import com.example.milk_store_app.session.SessionManager;
@@ -66,11 +60,8 @@ public class SignInActivity extends AppCompatActivity implements View.OnClickLis
         if(!checkInput()){
             return;
         }
+        // this will run asynchronously
         handeLoginApi();
-
-        Intent intent = new Intent(this, MainActivity.class);
-        startActivity(intent);
-        finish();
     }
 
     private void signUp(){
@@ -90,7 +81,7 @@ public class SignInActivity extends AppCompatActivity implements View.OnClickLis
     private void handeLoginApi() {
         LoginRequest loginRequest = new LoginRequest(userName.getText().toString(), password.getText().toString());
         Call<ResponseBody> call = authService.login(loginRequest);
-
+        // this will run asynchronously
         call.enqueue(new retrofit2.Callback<ResponseBody>() {
             @Override
             public void onResponse(Call<ResponseBody> call, retrofit2.Response<ResponseBody> response) {
