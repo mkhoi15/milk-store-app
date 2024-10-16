@@ -83,9 +83,7 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
         if (!checkInput()) {
             return;
         }
-        Intent intent = new Intent(this, SignInActivity.class);
-        startActivity(intent);
-        finish();
+        handleRegisterApi();
     }
 
     private void signIn() {
@@ -119,7 +117,8 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
                     assert response.body() != null;
                     showSuccessDialog(response.body().getMessage());
                 } else {
-                    Toast.makeText(SignUpActivity.this, "Register failed", Toast.LENGTH_SHORT).show();
+                    // Show error dialog
+                    handleError(response);
                 }
             }
 
@@ -151,7 +150,7 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
                 .show();
     }
 
-    private void handleError(retrofit2.Response<ResponseBody> response) {
+    private void handleError(Response<RegisterResponse> response) {
         try (ResponseBody responseBody = response.errorBody()) {
             // Convert the error body to the ErrorResponse model
             if (responseBody == null) {
@@ -170,10 +169,12 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
                     .collect(Collectors.toList());
 
 
-
+            String errorMessage = errorMessages.isEmpty()
+                    ? "An unknown error occurred."
+                    : String.join("\n", errorMessages);
 
             // Show the error dialog
-            //showErrorDialog(errorMessage);
+            showErrorDialog(errorMessage);
         } catch (Exception e) {
             showErrorDialog("An unknown error occurred.");
         }
