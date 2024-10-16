@@ -2,8 +2,8 @@ package com.example.milk_store_app.services;
 
 import com.example.milk_store_app.constants.Constants;
 import com.example.milk_store_app.models.request.LoginRequest;
-import com.example.milk_store_app.models.response.LoginResponse;
 
+import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.POST;
@@ -11,5 +11,5 @@ import retrofit2.http.POST;
 public interface AuthService {
 
     @POST(Constants.LOGIN_URL)
-    Call<LoginResponse> login(@Body LoginRequest loginRequest);
+    Call<ResponseBody> login(@Body LoginRequest loginRequest);
 }
