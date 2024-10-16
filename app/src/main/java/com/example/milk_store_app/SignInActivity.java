@@ -32,7 +32,7 @@ public class SignInActivity extends AppCompatActivity implements View.OnClickLis
     TextView create;
     Button loginButton;
     AuthService authService;
-    SessionManager sessionManager = new SessionManager(this);
+    SessionManager sessionManager;
 
     private final String REQUIRE = "Required!";
     @Override
@@ -40,6 +40,7 @@ public class SignInActivity extends AppCompatActivity implements View.OnClickLis
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_sign_in);
+        sessionManager = new SessionManager(this);
         authService = AuthRepository.getAuthService(this);
         userName = findViewById(R.id.username);
         password = findViewById(R.id.password);
