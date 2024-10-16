@@ -8,8 +8,6 @@ import com.example.milk_store_app.client.interceptor.AuthInterceptor;
 import com.example.milk_store_app.constants.Constants;
 import com.example.milk_store_app.services.AuthService;
 
-import org.jetbrains.annotations.Contract;
-
 import okhttp3.OkHttpClient;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;

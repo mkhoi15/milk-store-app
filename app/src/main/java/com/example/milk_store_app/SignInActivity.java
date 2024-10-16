@@ -13,11 +13,14 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
+import com.example.milk_store_app.client.ApiClient;
+
 public class SignInActivity extends AppCompatActivity implements View.OnClickListener {
     EditText userName;
     EditText password;
     TextView create;
     Button loginButton;
+    ApiClient apiClient;
 
     private final String REQUIRE = "Required!";
     @Override
@@ -25,7 +28,7 @@ public class SignInActivity extends AppCompatActivity implements View.OnClickLis
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_sign_in);
-
+        apiClient = new ApiClient();
         userName = findViewById(R.id.username);
         password = findViewById(R.id.password);
         create = findViewById(R.id.create);
