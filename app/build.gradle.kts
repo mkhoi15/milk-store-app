@@ -32,7 +32,10 @@ android {
 }
 
 dependencies {
-
+    implementation(libs.jwtdecode)
+    implementation(libs.retrofit)
+    implementation(libs.converter.gson)
+    implementation(libs.okhttp)
     implementation(libs.appcompat)
     implementation(libs.material)
     implementation(libs.activity)
