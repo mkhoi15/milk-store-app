@@ -6,7 +6,7 @@
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:elevation="5dp"
+        android:elevation="15dp"
         app:cardMaxElevation="5dp"
         app:cardCornerRadius="5dp"
         android:id="@+id/product_card_view"
@@ -20,8 +20,9 @@
             >
             <ImageView
                 android:layout_width="120dp"
-                android:layout_height="120dp"
+                android:layout_height="match_parent"
                 android:id="@+id/imgProductImg"
+                android:background="@drawable/rounded_corner_orange"
                 android:layout_marginRight="15dp"
                 />
             <LinearLayout
@@ -31,28 +32,40 @@
                 android:orientation="vertical"
                 >
                 <TextView
-                    android:id="@+id/txtProductName"
+                    android:id="@+id/product_name"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Product name"
                     android:textAlignment="textStart"
-                    android:textSize="24dp"
-                    android:textStyle="bold" />
+                    android:textSize="24sp" />
                 <TextView
-                    android:id="@+id/txtQuantity"
+                    android:id="@+id/product_stock"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="con lai 20"
                     android:textAlignment="textStart"
-                    android:textSize="14dp" />
+                    android:background="@drawable/rounded_corner_orange"
+                    android:textColor="@color/white"
+                    android:textStyle="bold"
+                    android:textSize="14sp" />
 
                 <TextView
-                    android:id="@+id/txtDescription"
+                    android:id="@+id/product_description"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:textAlignment="textStart"
+                    android:maxHeight="40dp"
                     android:text="Description Description Description Description Description Description Description Description Description Description "
-                    android:textSize="14dp" />
-
+                    android:textSize="14sp" />
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="6dp"
+                    android:text="200.000VND"
+                    android:textAlignment="textStart"
+                    android:textSize="20sp"
+                    android:textStyle="bold"
+                    android:textColor="@color/black" />
             </LinearLayout>
         </LinearLayout>
     </androidx.cardview.widget.CardView>
