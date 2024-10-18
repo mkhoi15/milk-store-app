@@ -53,5 +53,36 @@ public class SessionManager {
     public String fetchNameIdentifier() {
         return sharedPreferences.getString(NAME_IDENTIFIER, null);
     }
+
+    public boolean isLoggedIn() {
+        return fetchAuthToken() != null;
+    }
+
+
+    public boolean isAdmin() {
+        return isRole("Admin");
+    }
+
+    public boolean isShopStaff() {
+        return isRole("ShopStaff");
+    }
+
+    public boolean isDeliveryStaff() {
+        return isRole("DeliveryStaff");
+    }
+
+    public boolean isCustomer() {
+        return isRole("Customer");
+    }
+
+    public void clearSession() {
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.clear();
+        editor.apply();
+    }
+
+    private boolean isRole(@NonNull String role) {
+        return role.equals(fetchUserRole());
+    }
 }
 
