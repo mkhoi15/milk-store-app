@@ -72,7 +72,6 @@
                     android:text="Lorem ipsum Lorem ipsum Lorem ipsum "
                     android:textAlignment="textStart"
                     android:layout_marginTop="10dp"
-                    android:background=""
                     android:textSize="22sp" />
             </LinearLayout>
         </ScrollView>
