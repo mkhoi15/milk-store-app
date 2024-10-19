@@ -93,7 +93,8 @@ public class SignInActivity extends AppCompatActivity implements View.OnClickLis
                         }
                         String token = responseBody.string();
                         sessionManager.saveAuthToken(token);
-                        Intent intent = new Intent(SignInActivity.this, MainActivity.class);
+
+                        Intent intent = new Intent(SignInActivity.this, HomeViewActivity.class);
                         startActivity(intent);
                         finish();
                         return;

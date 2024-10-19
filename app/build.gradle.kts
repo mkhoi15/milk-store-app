@@ -32,6 +32,7 @@ android {
 }
 
 dependencies {
+    implementation(libs.glide)
     implementation(libs.jwtdecode)
     implementation(libs.retrofit)
     implementation(libs.converter.gson)
