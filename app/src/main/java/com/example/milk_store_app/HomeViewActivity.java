@@ -1,9 +1,11 @@
 package com.example.milk_store_app;
 
 import android.os.Bundle;
+import android.widget.ListView;
 import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
@@ -25,6 +27,7 @@ public class HomeViewActivity extends AppCompatActivity {
     ArrayList<ProductResponse> productsList;
     ProductServices productServices;
     ProductAdapter adapter;
+    ListView listView;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -35,15 +38,36 @@ public class HomeViewActivity extends AppCompatActivity {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
+        try {
+            projectData();
+        } catch (Exception e) {
+            AlertDialog.Builder builder = new AlertDialog.Builder(this);
+            builder.setTitle("Error");
+            builder.setMessage(e.getMessage());
+            builder.setPositiveButton("OK", (dialog, which) -> {
+                dialog.dismiss();
+            });
+        }
 
-        projectData();
     }
 
     private void projectData() {
-        productsList = new ArrayList<>();
-        adapter = new ProductAdapter(this, productsList, R.layout.product_item_list);
-        productServices = ProductRepository.getProductServices(this);
-        loadProducts();
+        try {
+            productsList = new ArrayList<>();
+            adapter = new ProductAdapter(this, productsList, R.layout.product_item_list);
+            listView = (ListView) findViewById(R.id.product_list);
+            listView.setAdapter(adapter);
+            productServices = ProductRepository.getProductServices(this);
+            loadProducts();
+
+        } catch (Exception e) {
+            AlertDialog.Builder builder = new AlertDialog.Builder(this);
+            builder.setTitle("Error");
+            builder.setMessage(e.getMessage());
+            builder.setPositiveButton("OK", (dialog, which) -> {
+                dialog.dismiss();
+            });
+        }
     }
 
     private void loadProducts() {

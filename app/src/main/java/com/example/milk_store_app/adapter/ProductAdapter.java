@@ -4,6 +4,7 @@ import android.content.Context;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.milk_store_app.R;
@@ -35,6 +36,7 @@ public class ProductAdapter extends BaseAdapter {
     }
 
     private static class ViewHolder {
+        ImageView imgProduct;
         TextView tvProductName, tvStock, tvPrice, tvDescription;
     }
 
@@ -44,6 +46,7 @@ public class ProductAdapter extends BaseAdapter {
         if (convertView == null) {
             convertView = View.inflate(context, layout, null);
             holder = new ViewHolder();
+            holder.imgProduct = convertView.findViewById(R.id.imgProductImg);
             holder.tvProductName = convertView.findViewById(R.id.product_name);
             holder.tvStock = convertView.findViewById(R.id.product_stock);
 //            holder.tvPrice = convertView.findViewById(R.id.product_price);
@@ -54,9 +57,10 @@ public class ProductAdapter extends BaseAdapter {
         }
 
         ProductResponse product = productList.get(position);
+        holder.imgProduct.setImageResource(R.drawable.ic_launcher_background);
         holder.tvProductName.setText(product.getName());
-        holder.tvStock.setText(product.getStock());
-        holder.tvPrice.setText(String.valueOf(product.getPrice()));
+        holder.tvStock.setText(String.valueOf(product.getStock()));
+//        holder.tvPrice.setText(String.valueOf(product.getPrice()));
         holder.tvDescription.setText(product.getDescription());
         return convertView;
     }
