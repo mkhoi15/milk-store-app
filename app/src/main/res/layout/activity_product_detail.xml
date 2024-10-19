@@ -72,7 +72,6 @@
                     android:text="Lorem ipsum Lorem ipsum Lorem ipsum "
                     android:textAlignment="textStart"
                     android:layout_marginTop="10dp"
-                    android:background=""
                     android:textSize="22sp" />
             </LinearLayout>
         </ScrollView>
@@ -105,7 +104,7 @@
                 android:layout_weight="3"
                 android:background="@color/light_green"
                 android:text="Thêm vào giỏ hàng"
-                android:textColor="@android:color/white"
+                android:textColor="@android:color/black"
                 android:textSize="22sp"
                 android:padding="10dp"/>
         </LinearLayout>
