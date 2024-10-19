@@ -7,6 +7,7 @@ import androidx.annotation.NonNull;
 import com.example.milk_store_app.client.interceptor.AuthInterceptor;
 import com.example.milk_store_app.constants.Constants;
 import com.example.milk_store_app.services.AuthService;
+import com.example.milk_store_app.services.ProductServices;
 
 import okhttp3.OkHttpClient;
 import retrofit2.Retrofit;
@@ -36,5 +37,9 @@ public class ApiClient {
 
     public AuthService getAuthService(Context context) {
         return createRetrofit(context).create(AuthService.class);
+    }
+
+    public ProductServices getProductServices(Context context) {
+        return createRetrofit(context).create(ProductServices.class);
     }
 }

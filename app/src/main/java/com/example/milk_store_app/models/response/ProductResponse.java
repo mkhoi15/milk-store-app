@@ -19,5 +19,6 @@ public final class ProductResponse {
     private BigDecimal price;
     private int stock;
     private String imageUrl;
-    private UUID categoryId;
+    private boolean isDeleted;
+    private String brandName;
 }
