@@ -1,6 +1,8 @@
 package com.example.milk_store_app;
 
 import android.os.Bundle;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -28,6 +30,9 @@ public class HomeViewActivity extends AppCompatActivity {
     ProductServices productServices;
     ProductAdapter adapter;
     ListView listView;
+    EditText search;
+    Button btnSearch;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -38,43 +43,29 @@ public class HomeViewActivity extends AppCompatActivity {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
-        try {
-            projectData();
-        } catch (Exception e) {
-            AlertDialog.Builder builder = new AlertDialog.Builder(this);
-            builder.setTitle("Error");
-            builder.setMessage(e.getMessage());
-            builder.setPositiveButton("OK", (dialog, which) -> {
-                dialog.dismiss();
-            });
-        }
+        projectData();
 
+        btnSearch.setOnClickListener(v -> {
+            loadProducts(search.getText().toString());
+        });
     }
 
     private void projectData() {
-        try {
-            productsList = new ArrayList<>();
-            adapter = new ProductAdapter(this, productsList, R.layout.product_item_list);
-            listView = (ListView) findViewById(R.id.product_list);
-            listView.setAdapter(adapter);
-            productServices = ProductRepository.getProductServices(this);
-            loadProducts();
-
-        } catch (Exception e) {
-            AlertDialog.Builder builder = new AlertDialog.Builder(this);
-            builder.setTitle("Error");
-            builder.setMessage(e.getMessage());
-            builder.setPositiveButton("OK", (dialog, which) -> {
-                dialog.dismiss();
-            });
-        }
+        productsList = new ArrayList<>();
+        adapter = new ProductAdapter(this, productsList, R.layout.product_item_list);
+        listView = (ListView) findViewById(R.id.product_list);
+        search = (EditText) findViewById(R.id.search_bar);
+        btnSearch = (Button) findViewById(R.id.btn_search);
+        listView.setAdapter(adapter);
+        productServices = ProductRepository.getProductServices(this);
+        loadProducts("");
     }
 
-    private void loadProducts() {
+    private void loadProducts(String search) {
         productServices.getProducts(
                 1,
                 10,
-                "",
+                search,
                 ""
         ).enqueue(new Callback<List<ProductResponse>>() {
             @Override

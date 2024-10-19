@@ -7,6 +7,7 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.example.milk_store_app.R;
 import com.example.milk_store_app.models.response.ProductResponse;
 
@@ -49,7 +50,7 @@ public class ProductAdapter extends BaseAdapter {
             holder.imgProduct = convertView.findViewById(R.id.imgProductImg);
             holder.tvProductName = convertView.findViewById(R.id.product_name);
             holder.tvStock = convertView.findViewById(R.id.product_stock);
-//            holder.tvPrice = convertView.findViewById(R.id.product_price);
+            holder.tvPrice = convertView.findViewById(R.id.product_price);
             holder.tvDescription = convertView.findViewById(R.id.product_description);
             convertView.setTag(holder);
         } else {
@@ -57,10 +58,21 @@ public class ProductAdapter extends BaseAdapter {
         }
 
         ProductResponse product = productList.get(position);
-        holder.imgProduct.setImageResource(R.drawable.ic_launcher_background);
+        if (product.getImageUrl() != null && !product.getImageUrl().isEmpty()) {
+            Glide.with(context)
+                    .load(product.getImageUrl())
+                    .into(holder.imgProduct);
+        } else {
+            holder.imgProduct.setImageResource(R.drawable.ic_launcher_background);
+        }
         holder.tvProductName.setText(product.getName());
-        holder.tvStock.setText(String.valueOf(product.getStock()));
-//        holder.tvPrice.setText(String.valueOf(product.getPrice()));
+
+        String stockFormatted = String.format(context.getResources().getString(R.string.product_stock), product.getStock());
+        holder.tvStock.setText(stockFormatted);
+
+        String priceFormatted = String.format(context.getResources().getString(R.string.product_price), product.getPrice().toString());
+        holder.tvPrice.setText(priceFormatted);
+
         holder.tvDescription.setText(product.getDescription());
         return convertView;
     }
