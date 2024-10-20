@@ -1,9 +1,11 @@
 package com.example.milk_store_app;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.ScrollView;
 import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
@@ -30,6 +32,7 @@ public class HomeViewActivity extends AppCompatActivity {
     ProductServices productServices;
     ProductAdapter adapter;
     ListView listView;
+    ScrollView scrollView;
     EditText search;
     Button btnSearch;
 
@@ -47,6 +50,14 @@ public class HomeViewActivity extends AppCompatActivity {
 
         btnSearch.setOnClickListener(v -> {
             loadProducts(search.getText().toString());
+        });
+
+        listView.setOnItemClickListener((parent, view, position, id) -> {
+            ProductResponse product = productsList.get(position);
+            Intent intent = new Intent(HomeViewActivity.this, ProductDetailActivity.class);
+            intent.putExtra("productId", product.getId().toString());
+            startActivity(intent);
+            finish();
         });
     }
 
