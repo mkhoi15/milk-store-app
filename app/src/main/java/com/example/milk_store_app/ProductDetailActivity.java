@@ -32,7 +32,6 @@ public class ProductDetailActivity extends AppCompatActivity {
     TextView productStock;
     ImageView productImage;
     Button btnAddToCart, btnGoBack;
-    CartManager cartManager;
     private String productId;
 
     @Override
@@ -61,8 +60,6 @@ public class ProductDetailActivity extends AppCompatActivity {
         btnAddToCart = findViewById(R.id.btn_add_to_cart);
         btnGoBack = findViewById(R.id.btn_go_back);
 
-        cartManager = new CartManager(this);
-
         String productId = getIntent().getStringExtra("productId");
         if (productId != null) {
             this.productId = productId;
@@ -72,9 +69,7 @@ public class ProductDetailActivity extends AppCompatActivity {
 
     private void addListeners() {
         btnAddToCart.setOnClickListener(v -> {
-            int quantity = cartManager.getItemQuantity(productId);
-            cartManager.addItemToCart(productId, quantity + 1);
-            Toast.makeText(this, "Added to cart successfully", Toast.LENGTH_SHORT).show();
+
         });
 
         btnGoBack.setOnClickListener(v -> {

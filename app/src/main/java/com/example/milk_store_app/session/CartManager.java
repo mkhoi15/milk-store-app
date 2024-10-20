@@ -1,68 +1,72 @@
 package com.example.milk_store_app.session;
 
 import android.content.Context;
-import android.content.SharedPreferences;
 
-import androidx.annotation.NonNull;
+import com.example.milk_store_app.database.CartDatabase;
+import com.example.milk_store_app.database.dao.CartItemDao;
+import com.example.milk_store_app.models.entities.CartItems;
 
-import com.example.milk_store_app.R;
-import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
-
-import java.lang.reflect.Type;
-import java.util.HashMap;
+import java.math.BigDecimal;
+import java.util.List;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 public class CartManager {
-    private static final String CART_KEY = "cart";
-    private final SharedPreferences sharedPreferences;
-    private final Gson gson;
+    private final CartItemDao cartItemDao;
+    private final ExecutorService executorService;
 
-    public CartManager(@NonNull Context context) {
-        sharedPreferences = context.getSharedPreferences(context.getString(R.string.app_name), Context.MODE_PRIVATE);
-        gson = new Gson();  // Gson instance for serialization
+    public CartManager(Context context) {
+        CartDatabase db = CartDatabase.getInstance(context);
+        cartItemDao = db.cartItemDao();
+        executorService = Executors.newSingleThreadExecutor();
     }
 
     // Add or update an item in the cart
-    public void addItemToCart(String productId, int quantity) {
-        HashMap<String, Integer> cart = getCart();
-        cart.put(productId, quantity);
-        saveCart(cart);  // Save updated cart back to SharedPreferences
+    public void addItemToCart(String productId, String productName, BigDecimal productPrice, int quantity) {
+        executorService.execute(() -> {
+            CartItems item = cartItemDao.getItemByProductId(productId);
+            if (item == null) {
+                // Add new item if not found in the cart
+                cartItemDao.insertItem(new CartItems(0, productId, productName, productPrice, quantity));
+            } else {
+                // Update existing item quantity if already in the cart
+                item.setQuantity(item.getQuantity() + quantity);
+                cartItemDao.updateItem(item);
+            }
+        });
     }
 
     // Remove an item from the cart
     public void removeItemFromCart(String productId) {
-        HashMap<String, Integer> cart = getCart();
-        if (cart.containsKey(productId)) {
-            cart.remove(productId);
-            saveCart(cart);  // Save updated cart back to SharedPreferences
-        }
+        executorService.execute(() -> {
+            CartItems item = cartItemDao.getItemByProductId(productId);
+            if (item != null) {
+                cartItemDao.deleteItem(item);
+            }
+        });
     }
 
     // Get the quantity of a specific item in the cart
     public int getItemQuantity(String productId) {
-        HashMap<String, Integer> cart = getCart();
-        Integer quantityObj = cart.get(productId);
-        return (quantityObj != null) ? quantityObj : 0;
+        CartItems item = cartItemDao.getItemByProductId(productId);
+        return (item != null) ? item.getQuantity() : 0;
     }
 
     // Get the entire cart
-    public HashMap<String, Integer> getCart() {
-        String cartJson = sharedPreferences.getString(CART_KEY, null);
-        if (cartJson == null) {
-            return new HashMap<>();  // Return empty cart if not found
-        }
-        Type type = new TypeToken<HashMap<String, Integer>>() {}.getType();
-        return gson.fromJson(cartJson, type);
+    public List<CartItems> getCart() {
+        return cartItemDao.getAllItems();
+    }
+
+    public BigDecimal getTotalPrice() {
+        List<CartItems> cartItems = getCart();
+
+        return cartItems.stream()
+                .map(CartItems::getProductPrice)
+                .reduce(BigDecimal.ZERO, BigDecimal::add);
     }
 
     // Clear the cart
     public void clearCart() {
-        sharedPreferences.edit().remove(CART_KEY).apply();
-    }
-
-    // Save the cart (HashMap) to SharedPreferences
-    private void saveCart(HashMap<String, Integer> cart) {
-        String cartJson = gson.toJson(cart);
-        sharedPreferences.edit().putString(CART_KEY, cartJson).apply();
+        executorService.execute(cartItemDao::clearCart);
     }
 }
