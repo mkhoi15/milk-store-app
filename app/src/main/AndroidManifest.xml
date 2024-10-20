@@ -15,6 +15,9 @@
         android:theme="@style/Theme.Milkstoreapp"
         tools:targetApi="31">
         <activity
+            android:name=".CartViewActivity"
+            android:exported="false" />
+        <activity
             android:name=".ProductDetailActivity"
             android:exported="false" />
         <activity
