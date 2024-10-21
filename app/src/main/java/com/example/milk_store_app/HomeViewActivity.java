@@ -57,7 +57,6 @@ public class HomeViewActivity extends AppCompatActivity {
             Intent intent = new Intent(HomeViewActivity.this, ProductDetailActivity.class);
             intent.putExtra("productId", product.getId().toString());
             startActivity(intent);
-            finish();
         });
     }
 
