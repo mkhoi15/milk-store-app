@@ -6,7 +6,7 @@ import com.example.milk_store_app.database.CartDatabase;
 import com.example.milk_store_app.database.dao.CartItemDao;
 import com.example.milk_store_app.models.entities.CartItems;
 
-import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
@@ -54,7 +54,11 @@ public class CartManager {
 
     // Get the entire cart
     public List<CartItems> getCart() {
-        return cartItemDao.getAllItems();
+        List<CartItems> cartItems = new ArrayList<>();
+        executorService.execute(() -> {
+            cartItems.addAll(cartItemDao.getAllItems());
+        });
+        return cartItems;
     }
 
     public double getTotalPrice() {
