@@ -1,5 +1,6 @@
 package com.example.milk_store_app;
 
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -14,13 +15,17 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
 import com.bumptech.glide.Glide;
-import com.example.milk_store_app.adapter.ProductAdapter;
+import com.example.milk_store_app.models.entities.CartItems;
 import com.example.milk_store_app.models.response.ProductResponse;
 import com.example.milk_store_app.repository.ProductRepository;
 import com.example.milk_store_app.services.ProductServices;
 import com.example.milk_store_app.session.CartManager;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -32,7 +37,10 @@ public class ProductDetailActivity extends AppCompatActivity {
     TextView productStock;
     ImageView productImage;
     Button btnAddToCart, btnGoBack;
+    CartManager cartManager;
     private String productId;
+    ProductResponse product;
+//    ExecutorService executorService;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,16 +68,45 @@ public class ProductDetailActivity extends AppCompatActivity {
         btnAddToCart = findViewById(R.id.btn_add_to_cart);
         btnGoBack = findViewById(R.id.btn_go_back);
 
+        cartManager = new CartManager(this);
+//        executorService = Executors.newSingleThreadExecutor();
+
         String productId = getIntent().getStringExtra("productId");
         if (productId != null) {
             this.productId = productId;
             loadProduct(productId);
         }
+
+//        loadCartItems();
     }
+
+//    private void loadCartItems() {
+//        executorService.execute(() -> {
+//            List<CartItems> cartItems = cartManager.getCart(); // Retrieve cart items
+//
+//            runOnUiThread(() -> {
+//                // Update UI with cart items
+//                if (cartItems != null) {
+//                    // Handle the cart items
+//                }
+//            });
+//        });
+//    }
+//
+//    @Override
+//    protected void onDestroy() {
+//        super.onDestroy();
+//        executorService.shutdown(); // Clean up the executor
+//    }
 
     private void addListeners() {
         btnAddToCart.setOnClickListener(v -> {
-
+            if (product == null) {
+                Toast.makeText(this, "Product not found", Toast.LENGTH_SHORT).show();
+                return;
+            }
+            cartManager.addItemToCart(productId, product.getName(), product.getPrice().doubleValue(), 1);
+            Toast.makeText(this, "Product added to cart", Toast.LENGTH_SHORT).show();
         });
 
         btnGoBack.setOnClickListener(v -> {
@@ -82,7 +119,7 @@ public class ProductDetailActivity extends AppCompatActivity {
             @Override
             public void onResponse(Call<ProductResponse> call, Response<ProductResponse> response) {
                 if (response.isSuccessful()) {
-                    ProductResponse product = response.body();
+                    product = response.body();
                     if (product == null) {
                         AlertDialog.Builder builder = new AlertDialog.Builder(ProductDetailActivity.this);
                         builder.setMessage("Product not found");

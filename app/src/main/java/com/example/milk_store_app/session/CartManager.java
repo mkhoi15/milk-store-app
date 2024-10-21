@@ -22,7 +22,7 @@ public class CartManager {
     }
 
     // Add or update an item in the cart
-    public void addItemToCart(String productId, String productName, BigDecimal productPrice, int quantity) {
+    public void addItemToCart(String productId, String productName, double productPrice, int quantity) {
         executorService.execute(() -> {
             CartItems item = cartItemDao.getItemByProductId(productId);
             if (item == null) {
@@ -57,12 +57,12 @@ public class CartManager {
         return cartItemDao.getAllItems();
     }
 
-    public BigDecimal getTotalPrice() {
+    public double getTotalPrice() {
         List<CartItems> cartItems = getCart();
 
         return cartItems.stream()
-                .map(CartItems::getProductPrice)
-                .reduce(BigDecimal.ZERO, BigDecimal::add);
+                .mapToDouble(item -> item.getProductPrice() * item.getQuantity())
+                .sum();
     }
 
     // Clear the cart
