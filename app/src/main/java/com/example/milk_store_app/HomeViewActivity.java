@@ -42,7 +42,7 @@ public class HomeViewActivity extends AppCompatActivity {
     ListView listView;
     ScrollView scrollView;
     EditText search;
-    Button btnSearch;
+    Button btnSearch, btnCart;
     CartManager cartManager;
 
     private static final String CHANNEL_ID = "cart_notification_channel";
@@ -68,6 +68,10 @@ public class HomeViewActivity extends AppCompatActivity {
         btnSearch.setOnClickListener(v -> {
             loadProducts(search.getText().toString());
         });
+        btnCart.setOnClickListener(v -> {
+            Intent intent = new Intent(HomeViewActivity.this, CartViewActivity.class);
+            startActivity(intent);
+        });
 
         listView.setOnItemClickListener((parent, view, position, id) -> {
             ProductResponse product = productsList.get(position);
@@ -83,6 +87,7 @@ public class HomeViewActivity extends AppCompatActivity {
         listView = (ListView) findViewById(R.id.product_list);
         search = (EditText) findViewById(R.id.search_bar);
         btnSearch = (Button) findViewById(R.id.btn_search);
+        btnCart = (Button) findViewById(R.id.btn_cart);
         listView.setAdapter(adapter);
 
 

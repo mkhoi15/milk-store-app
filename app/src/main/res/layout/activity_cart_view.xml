@@ -50,27 +50,11 @@
         app:layout_constraintTop_toBottomOf="@id/header_title">
 
         <!-- ScrollView for Cart Items -->
-        <ScrollView
+        <ListView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:padding="20dp"
-            >
-
-            <!-- Add dynamic content such as cart items here -->
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical">
-                <!-- Example of an item layout -->
-                <TextView
-                    android:id="@+id/sample_cart_item"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="Item 1 - $10.00"
-                    android:textSize="18sp"
-                    android:padding="8dp"/>
-            </LinearLayout>
-        </ScrollView>
+            android:padding="30dp"
+            android:id="@+id/cart_list"/>
     </androidx.cardview.widget.CardView>
 
     <!-- Bottom Button Section -->
