@@ -6,5 +6,6 @@ public final class Constants {
     public static final String REGISTER_URL = "/api/auth/register";
 
     public static final String PRODUCT_URL = "/api/product";
+    public static final String ORDER_URL = "/api/orders";
 }
 
