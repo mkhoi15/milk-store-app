@@ -42,7 +42,6 @@ public class HomeViewActivity extends AppCompatActivity {
     ProductServices productServices;
     ProductAdapter adapter;
     ListView listView;
-    ScrollView scrollView;
     EditText search;
     Button btnSearch, btnCart, btnOrderHistory;
     CartManager cartManager;
@@ -77,7 +76,12 @@ public class HomeViewActivity extends AppCompatActivity {
         });
 
         btnOrderHistory.setOnClickListener(v -> {
-            Intent intent = new Intent(HomeViewActivity.this, CustomerOrderHistoryActivity.class);
+            if (sessionManager.isCustomer()) {
+                Intent intent = new Intent(HomeViewActivity.this, CustomerOrderHistoryActivity.class);
+                startActivity(intent);
+                return;
+            }
+            Intent intent = new Intent(HomeViewActivity.this, StaffViewOrderActivity.class);
             startActivity(intent);
         });
 
