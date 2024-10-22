@@ -84,6 +84,7 @@ public class CartAdapter extends BaseAdapter {
 
         holder.btnDelete.setOnClickListener(v -> {
             cartManager.removeItemFromCart(cartItem.getProductId());
+            cartList.remove(i);
             notifyDataSetChanged();
         });
 
