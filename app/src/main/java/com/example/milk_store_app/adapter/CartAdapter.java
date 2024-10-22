@@ -59,17 +59,17 @@ public class CartAdapter extends BaseAdapter {
             holder = (ViewHolder) convertView.getTag();
         }
 
-        CartItems cartItems = cartList.get(i);
-        holder.tvProductName.setText(cartItems.getProductName());
+        CartItems cartItem = cartList.get(i);
+        holder.tvProductName.setText(cartItem.getProductName());
         holder.tvPrice.setText(String.format(
                 context.getResources().getString(R.string.product_price),
-                String.valueOf(cartItems.getProductPrice())));
-        holder.txProductAmount.setText(cartItems.getQuantity());
+                String.valueOf(cartItem.getProductPrice())));
+        holder.txProductAmount.setText(String.valueOf(cartItem.getQuantity()));
 
         holder.btnIncrease.setOnClickListener(v -> {
             int quantity = Integer.parseInt(holder.txProductAmount.getText().toString());
             quantity++;
-            cartManager.setItemQuantity(cartItems.getProductId(), quantity);
+            cartManager.setItemQuantity(cartItem.getProductId(), quantity);
             holder.txProductAmount.setText(String.valueOf(quantity));
         });
 
@@ -77,13 +77,13 @@ public class CartAdapter extends BaseAdapter {
             int quantity = Integer.parseInt(holder.txProductAmount.getText().toString());
             if (quantity > 0) {
                 quantity--;
-                cartManager.setItemQuantity(cartItems.getProductId(), quantity);
+                cartManager.setItemQuantity(cartItem.getProductId(), quantity);
                 holder.txProductAmount.setText(String.valueOf(quantity));
             }
         });
 
         holder.btnDelete.setOnClickListener(v -> {
-            cartList.remove(cartItems);
+            cartManager.removeItemFromCart(cartItem.getProductId());
             notifyDataSetChanged();
         });
 

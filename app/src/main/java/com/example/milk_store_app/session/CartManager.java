@@ -55,8 +55,16 @@ public class CartManager {
 
     //Set the quantity of a specific item in the cart
     public void setItemQuantity(String productId, int quantity) {
-        CartItems item = cartItemDao.getItemByProductId(productId);
-        if (item != null) item.setQuantity(quantity);
+        Future<?> future = executorService.submit(() -> {
+            CartItems item = cartItemDao.getItemByProductId(productId);
+            if (item != null) item.setQuantity(quantity);
+            cartItemDao.updateItem(item);
+        });
+        try {
+            future.get();
+        } catch (Exception e) {
+            return;
+        }
     }
 
     // Get the entire cart
