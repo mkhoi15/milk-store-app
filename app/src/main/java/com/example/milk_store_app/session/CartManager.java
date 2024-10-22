@@ -10,6 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
+import java.util.concurrent.Future;
 
 public class CartManager {
     private final CartItemDao cartItemDao;
@@ -55,9 +56,14 @@ public class CartManager {
     // Get the entire cart
     public List<CartItems> getCart() {
         List<CartItems> cartItems = new ArrayList<>();
-        executorService.execute(() -> {
+        Future<?> future = executorService.submit(() -> {
             cartItems.addAll(cartItemDao.getAllItems());
         });
+        try {
+            future.get();
+        } catch (Exception e) {
+            return cartItems;
+        }
         return cartItems;
     }
 
