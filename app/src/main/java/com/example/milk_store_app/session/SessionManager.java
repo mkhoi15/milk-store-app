@@ -14,6 +14,7 @@ public class SessionManager {
     private static final String USER_TOKEN = "user_token";
     private static final String USER_ROLE = "user_role";
     private static final String NAME_IDENTIFIER = "name_identifier";
+    private static final String USER_ID = "user_id";
 
     public SessionManager(@NonNull Context context) {
         sharedPreferences = context.getSharedPreferences(context.getString(R.string.app_name), Context.MODE_PRIVATE);
@@ -25,11 +26,13 @@ public class SessionManager {
     public void saveAuthToken(String token) {
         JWT jwt = new JWT(token);
         String role = jwt.getClaim(JwtConstants.USER_ROLE).asString();
+        String userId = jwt.getClaim(JwtConstants.USER_ID).asString();
         String nameIdentifier = jwt.getClaim(JwtConstants.NAME_IDENTIFIER).asString();
         SharedPreferences.Editor editor = sharedPreferences.edit();
         editor.putString(USER_TOKEN, token);
         editor.putString(USER_ROLE, role);
         editor.putString(NAME_IDENTIFIER, nameIdentifier);
+        editor.putString(USER_ID, userId);
         editor.apply();
     }
 
@@ -52,6 +55,13 @@ public class SessionManager {
      */
     public String fetchNameIdentifier() {
         return sharedPreferences.getString(NAME_IDENTIFIER, null);
+    }
+
+    /**
+     * Function to fetch user id from shared preferences
+     */
+    public String fetchUserId() {
+        return sharedPreferences.getString(USER_ID, null);
     }
 
     public boolean isLoggedIn() {
