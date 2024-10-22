@@ -1,5 +1,5 @@
 <resources>
     <string name="app_name">milk-store-app</string>
-    <string name="product_price">%s VND</string>
+    <string name="product_price">%s</string>
     <string name="product_stock">con lai %d</string>
 </resources>

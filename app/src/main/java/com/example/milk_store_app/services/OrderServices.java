@@ -6,7 +6,6 @@ import com.example.milk_store_app.models.response.OrderResponse;
 
 import java.util.List;
 
-import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.GET;
@@ -17,6 +16,7 @@ import retrofit2.http.Query;
 public interface OrderServices {
     @POST(Constants.ORDER_URL)
     Call<PostOrderRequest> createOrder(@Body PostOrderRequest request);
+
     @GET(Constants.ORDER_URL + "/user/{id}")
     Call<List<OrderResponse>> getOrdersByUserId(
             @Path("id") String userId,

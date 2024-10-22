@@ -71,6 +71,14 @@
             android:layout_weight="3"
             android:text="Cart"
             android:textColor="@color/black"/>
+
+        <Button
+            android:id="@+id/btn_order_history"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="3"
+            android:text="Order History"
+            android:textColor="@color/black"/>
     </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

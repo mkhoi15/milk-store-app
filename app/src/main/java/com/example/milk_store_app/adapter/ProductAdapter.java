@@ -10,6 +10,7 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.example.milk_store_app.R;
 import com.example.milk_store_app.models.response.ProductResponse;
+import com.example.milk_store_app.untils.NumberHelper;
 
 import java.util.ArrayList;
 
@@ -70,7 +71,7 @@ public class ProductAdapter extends BaseAdapter {
         String stockFormatted = String.format(context.getResources().getString(R.string.product_stock), product.getStock());
         holder.tvStock.setText(stockFormatted);
 
-        String priceFormatted = String.format(context.getResources().getString(R.string.product_price), product.getPrice().toString());
+        String priceFormatted = String.format(context.getResources().getString(R.string.product_price), NumberHelper.formatNumber(product.getPrice()));
         holder.tvPrice.setText(priceFormatted);
 
         holder.tvDescription.setText(product.getDescription());
