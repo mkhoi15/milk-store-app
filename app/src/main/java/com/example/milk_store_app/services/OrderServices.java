@@ -17,6 +17,9 @@ public interface OrderServices {
     @POST(Constants.ORDER_URL)
     Call<PostOrderRequest> createOrder(@Body PostOrderRequest request);
 
+    @POST(Constants.ORDER_URL)
+    Call<OrderResponse> createOrdertest(@Body PostOrderRequest request);
+
     @GET(Constants.ORDER_URL + "/user/{id}")
     Call<List<OrderResponse>> getOrdersByUserId(
             @Path("id") String userId,

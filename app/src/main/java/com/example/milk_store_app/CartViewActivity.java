@@ -1,5 +1,6 @@
 package com.example.milk_store_app;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.ListView;
@@ -57,13 +58,15 @@ public class CartViewActivity extends AppCompatActivity {
 
         btnPay.setOnClickListener(v -> {
             // TODO: Implement payment logic here
-            HandlePayment();
+          //  HandlePayment();
+            Intent intent = new Intent(CartViewActivity.this, CheckOutActivity.class); // Replace CurrentActivity with your current activity class name
+            startActivity(intent);
         });
 
 
     }
 
-    private void HandlePayment() {
+  /*  private void HandlePayment() {
         List<OrderItem> orderItems = new ArrayList<>();
         for (CartItems cartItem : cartList) {
             OrderItem orderItem = new OrderItem();
@@ -97,7 +100,7 @@ public class CartViewActivity extends AppCompatActivity {
                 Toast.makeText(CartViewActivity.this, t.getMessage(), Toast.LENGTH_SHORT).show();
             }
         });
-    }
+    }*/
 
     private void ProjectData() {
         cartManager = new CartManager(this);
