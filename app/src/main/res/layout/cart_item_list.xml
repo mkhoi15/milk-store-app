@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:elevation="15dp"
+        app:cardMaxElevation="5dp"
+        app:cardCornerRadius="5dp"
+        android:id="@+id/cart_card_view">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:padding="10dp"
+            android:id="@+id/ll_bg"
+            android:weightSum="12"
+            >
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="5"
+                android:text="Sữa tươi Vinamilk 500ml"
+                android:textAlignment="textStart"
+                android:textSize="18sp"
+                android:id="@+id/product_name"/>
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="2"
+                android:text="200.000"
+                android:gravity="center"
+                android:textSize="16sp"
+                android:textColor="@color/dark_green"
+                android:id="@+id/product_price"/>
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="3"
+                android:orientation="horizontal"
+                android:gravity="center">
+
+                <!-- Decrease Quantity Button -->
+                <Button
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="40dp"
+                    android:id="@+id/decrease_quantity"
+                    android:text="-" />
+
+                <!-- Quantity TextView -->
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:text="2"
+                    android:gravity="center"
+                    android:textAlignment="center"
+                    android:textSize="20sp"
+                    android:id="@+id/product_quantity" />
+
+                <!-- Increase Quantity Button -->
+                <Button
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="40dp"
+                    android:id="@+id/increase_quantity"
+                    android:text="+" />
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="2"
+                android:gravity="center"
+                >
+                <Button
+                    android:layout_width="48dp"
+                    android:layout_height="48dp"
+                    android:background="@drawable/ic_trash_can"
+                    android:id="@+id/delete_button"/>
+            </LinearLayout>
+        </LinearLayout>
+    </androidx.cardview.widget.CardView>
+
+</RelativeLayout>
