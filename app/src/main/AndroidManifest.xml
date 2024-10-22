@@ -18,12 +18,17 @@
             android:name=".CartViewActivity"
             android:exported="false" />
         <activity
+            android:name=".PaymentNotification"
+            android:exported="false" />
+        <activity
+
             android:name=".ProductDetailActivity"
             android:exported="false" />
         <activity
             android:name=".HomeViewActivity"
             android:exported="false" />
         <activity
+
             android:name=".SignUpActivity"
             android:exported="false" />
         <activity
@@ -37,16 +42,37 @@
             android:exported="false" />
         <activity
             android:name=".CheckOutActivity"
-            android:exported="false" />
+            android:exported="true"
+            android:label="Merchant Demo"
+            android:launchMode="singleTask"
+            >
+
+            <!-- Set CheckOutActivity as the launcher activity -->
+
+
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+
+                <data
+                    android:host="app"
+                    android:scheme="demozpdk" />
+            </intent-filter>
+        </activity>
         <activity
             android:name=".SignInActivity"
             android:exported="true">
+
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+
         </activity>
+        <meta-data android:name="com.zalopay.sdk.APP_ID" android:value="2553" />
+        <meta-data android:name="com.zalopay.sdk.MAC_KEY" android:value="PcY4iZIKFCIdgZvA6ueMcMHHUbRLYjPL" />
     </application>
 
 </manifest>

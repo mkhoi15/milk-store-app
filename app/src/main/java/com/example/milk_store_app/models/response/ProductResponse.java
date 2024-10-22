@@ -21,4 +21,6 @@ public final class ProductResponse {
     private String imageUrl;
     private boolean isDeleted;
     private String brandName;
+
+
 }

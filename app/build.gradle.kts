@@ -41,6 +41,14 @@ dependencies {
     implementation(libs.material)
     implementation(libs.activity)
     implementation(libs.constraintlayout)
+    implementation("com.squareup.okhttp3:okhttp:4.6.0")
+    implementation("commons-codec:commons-codec:1.14")
+
+    implementation(fileTree(mapOf(
+        "dir" to "D:\\LabPRM\\ZPDK_ANdroid",
+        "include" to listOf("*.aar", "*.jar"),
+        "exclude" to listOf("")
+    )))
     compileOnly(libs.lombok)
     testImplementation(libs.junit)
     androidTestImplementation(libs.ext.junit)
