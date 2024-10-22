@@ -64,6 +64,13 @@
         app:layout_constraintTop_toBottomOf="@+id/product_list"
         app:layout_constraintHeight_percent="0.1"
         >
+        <Button
+            android:id="@+id/btn_cart"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="3"
+            android:text="Cart"
+            android:textColor="@color/black"/>
     </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

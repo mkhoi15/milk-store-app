@@ -53,6 +53,12 @@ public class CartManager {
         return (item != null) ? item.getQuantity() : 0;
     }
 
+    //Set the quantity of a specific item in the cart
+    public void setItemQuantity(String productId, int quantity) {
+        CartItems item = cartItemDao.getItemByProductId(productId);
+        if (item != null) item.setQuantity(quantity);
+    }
+
     // Get the entire cart
     public List<CartItems> getCart() {
         List<CartItems> cartItems = new ArrayList<>();
