@@ -108,6 +108,7 @@ public class HomeViewActivity extends AppCompatActivity {
         sessionManager = new SessionManager(this);
 
         if (sessionManager.isAdmin()) {
+            btnCart.setVisibility(View.GONE);
             btnOrderHistory.setVisibility(View.GONE);
         }
 

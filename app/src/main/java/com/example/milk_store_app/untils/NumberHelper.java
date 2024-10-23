@@ -13,6 +13,9 @@ public class NumberHelper {
      *     The currency format is based on the Vietnamese locale
      *     and the currency symbol is "₫" at the end of the number
      * </p>
+     * <p>
+     *     example: 1000000 -> "1,000,000₫"
+     * </p>
      * @param number the number to format
      * @return the formatted number as a string
      */
