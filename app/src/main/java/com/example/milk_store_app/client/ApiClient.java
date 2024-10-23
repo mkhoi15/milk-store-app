@@ -9,24 +9,21 @@ import com.example.milk_store_app.constants.Constants;
 import com.example.milk_store_app.services.AuthService;
 import com.example.milk_store_app.services.OrderServices;
 import com.example.milk_store_app.services.ProductServices;
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
 
 import okhttp3.OkHttpClient;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
+import retrofit2.converter.scalars.ScalarsConverterFactory;
 
 public class ApiClient {
     private Retrofit retrofit;
-    Gson gson = new GsonBuilder()
-            .setLenient()
-            .create();
 
     private Retrofit createRetrofit(Context context) {
         if (retrofit == null) {
             retrofit = new Retrofit.Builder()
                 .baseUrl(Constants.BASE_URL)
-                .addConverterFactory(GsonConverterFactory.create(gson))
+                .addConverterFactory(ScalarsConverterFactory.create())
+                .addConverterFactory(GsonConverterFactory.create())
                 .client(createOkHttpClient(context))
                 .build();
             return retrofit;
