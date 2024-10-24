@@ -39,5 +39,5 @@ public interface ProductServices {
     Call<String> uploadImage(@Part MultipartBody.Part image);
 
     @PUT(Constants.PRODUCT_URL + "/{id}")
-    Call<ProductResponse> updateProduct(@Path("id") UUID id, @Body ProductUpdateRequest product);
+    Call<Void> updateProduct(@Path("id") UUID id, @Body ProductUpdateRequest product);
 }

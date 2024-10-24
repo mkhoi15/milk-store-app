@@ -33,6 +33,7 @@ import java.io.OutputStream;
 import java.math.BigDecimal;
 import java.nio.file.Files;
 
+import lombok.Setter;
 import okhttp3.MediaType;
 import okhttp3.MultipartBody;
 import okhttp3.RequestBody;
@@ -49,6 +50,8 @@ public class ProductDialog extends DialogFragment {
     private EditText etProductName, etProductPrice, etProductStock, etProductDescription;
     private Button btnUpdateProduct;
     private Uri selectedImageUri;
+    @Setter
+    private ProductUpdateListener productUpdateListener;
 
     public ProductDialog() {
         // Required empty public constructor
@@ -193,12 +196,16 @@ public class ProductDialog extends DialogFragment {
                 .imageUrl(imageUrl != null ? imageUrl : product.getImageUrl())
                 .build();
 
-        productServices.updateProduct(product.getId(), productUpdateRequest).enqueue(new Callback<ProductResponse>() {
+        productServices.updateProduct(product.getId(), productUpdateRequest).enqueue(new Callback<Void>() {
             @Override
-            public void onResponse(Call<ProductResponse> call, Response<ProductResponse> response) {
+            public void onResponse(Call<Void> call, Response<Void> response) {
                 AlertDialog.Builder builder = new AlertDialog.Builder(requireContext());
                 if (response.isSuccessful()) {
                     builder.setMessage("Product updated successfully");
+                    if (productUpdateListener != null) {
+                        productUpdateListener.onProductUpdated();
+                    }
+                    dismiss();
                 } else {
                     builder.setMessage("Failed to update product");
                 }
@@ -209,7 +216,7 @@ public class ProductDialog extends DialogFragment {
             }
 
             @Override
-            public void onFailure(Call<ProductResponse> call, Throwable t) {
+            public void onFailure(Call<Void> call, Throwable t) {
                 showErrorDialog("Failed to update product: " + t.getMessage());
             }
         });
@@ -239,4 +246,9 @@ public class ProductDialog extends DialogFragment {
                 .setPositiveButton("OK", (dialog, which) -> dialog.dismiss())
                 .show();
     }
+
+    public interface ProductUpdateListener {
+        void onProductUpdated();
+    }
+
 }

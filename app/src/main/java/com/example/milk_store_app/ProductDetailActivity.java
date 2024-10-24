@@ -34,7 +34,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class ProductDetailActivity extends AppCompatActivity {
+public class ProductDetailActivity extends AppCompatActivity implements ProductDialog.ProductUpdateListener {
     ProductServices productServices;
     TextView productName, productPrice, productDescription;
     TextView productStock;
@@ -109,6 +109,7 @@ public class ProductDetailActivity extends AppCompatActivity {
     private void openProductEditDialog() {
         // Create and show the ProductDialog for editing the product
         ProductDialog productDialog = ProductDialog.newInstance(product);
+        productDialog.setProductUpdateListener(this);
         productDialog.show(getSupportFragmentManager(), "ProductDialog");
     }
 
@@ -155,5 +156,10 @@ public class ProductDetailActivity extends AppCompatActivity {
                 builder.show();
             }
         });
+    }
+
+    @Override
+    public void onProductUpdated() {
+        loadProduct(productId);
     }
 }
