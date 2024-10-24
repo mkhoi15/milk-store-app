@@ -108,8 +108,13 @@ public class HomeViewActivity extends AppCompatActivity {
         sessionManager = new SessionManager(this);
 
         if (sessionManager.isAdmin()) {
-            btnCart.setVisibility(View.GONE);
+            //btnCart.setVisibility(View.GONE);
             btnOrderHistory.setVisibility(View.GONE);
+            btnCart.setText("Add product");
+        }
+        if (sessionManager.isCustomer()) {
+            btnOrderHistory.setText("View order");
+            btnCart.setText("View cart");
         }
 
         loadProducts("");

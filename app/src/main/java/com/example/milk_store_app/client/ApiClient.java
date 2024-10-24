@@ -7,6 +7,7 @@ import androidx.annotation.NonNull;
 import com.example.milk_store_app.client.interceptor.AuthInterceptor;
 import com.example.milk_store_app.constants.Constants;
 import com.example.milk_store_app.services.AuthService;
+import com.example.milk_store_app.services.BrandServices;
 import com.example.milk_store_app.services.OrderServices;
 import com.example.milk_store_app.services.ProductServices;
 
@@ -48,5 +49,9 @@ public class ApiClient {
 
     public OrderServices getOrderServices(Context context) {
         return createRetrofit(context).create(OrderServices.class);
+    }
+
+    public BrandServices getBrandServices(Context context) {
+        return createRetrofit(context).create(BrandServices.class);
     }
 }
