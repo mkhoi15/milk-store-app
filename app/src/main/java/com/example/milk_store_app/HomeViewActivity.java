@@ -70,10 +70,17 @@ public class HomeViewActivity extends AppCompatActivity {
         btnSearch.setOnClickListener(v -> {
             loadProducts(search.getText().toString());
         });
-        btnCart.setOnClickListener(v -> {
-            Intent intent = new Intent(HomeViewActivity.this, CartViewActivity.class);
-            startActivity(intent);
-        });
+        if (sessionManager.isAdmin()) {
+            btnCart.setOnClickListener(v -> {
+                Intent intent = new Intent(HomeViewActivity.this, AddProductActivity.class);
+                startActivity(intent);
+            });
+        } else {
+            btnCart.setOnClickListener(v -> {
+                Intent intent = new Intent(HomeViewActivity.this, CartViewActivity.class);
+                startActivity(intent);
+            });
+        }
 
         btnOrderHistory.setOnClickListener(v -> {
             if (sessionManager.isCustomer()) {

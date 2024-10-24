@@ -92,11 +92,11 @@ public class AddProductActivity extends AppCompatActivity {
             }
         });
 
+        RegisterResult();
 
         btnSelectImg.setOnClickListener(v -> {
-            Intent intent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
-            intent.setType("image/*");
-            RegisterResult();
+            Intent intent = new Intent(MediaStore.ACTION_PICK_IMAGES);
+            resultLauncher.launch(intent);
         });
 
         btnAdd.setOnClickListener(v -> {
@@ -118,23 +118,7 @@ public class AddProductActivity extends AppCompatActivity {
             try {
                 imagePart = PrepareFilePart(selectedImageUri);
                 //Upload image
-                productServices.uploadImage(imagePart).enqueue(
-                new Callback<String>() {
-                    @Override
-                    public void onResponse(Call<String> call, Response<String> response) {
-                        if (response.isSuccessful()) {
-                            imageUrl = response.body().toString();
-                        } else {
-                            Toast.makeText(AddProductActivity.this, "Image upload failed", Toast.LENGTH_SHORT).show();
-                        }
-                    }
-
-                    @Override
-                    public void onFailure(Call<String> call, Throwable t) {
-
-                    }
-                });
-
+                imageUrl = productServices.uploadImage(imagePart).execute().body();
                 if (!imageUrl.isEmpty()){
                     productServices.createProduct(new ProductCreateRequest(
                                     name,
@@ -148,17 +132,20 @@ public class AddProductActivity extends AppCompatActivity {
                             new Callback<ProductResponse>() {
                                 @Override
                                 public void onResponse(Call<ProductResponse> call, Response<ProductResponse> response) {
+                                    if (response.isSuccessful()) {
+                                        Toast.makeText(AddProductActivity.this, "Add product successfully!", Toast.LENGTH_SHORT).show();
+                                        finish();
+                                    } else {
+                                        Toast.makeText(AddProductActivity.this, "Add product failed!", Toast.LENGTH_SHORT).show();
+                                    }
                                 }
-
                                 @Override
                                 public void onFailure(Call<ProductResponse> call, Throwable t) {
-
                                 }
                             }
                     );
                 }
-
-            } catch (IOException e) {
+            } catch (Exception e) {
                 throw new RuntimeException(e);
             }
         });
@@ -235,6 +222,7 @@ public class AddProductActivity extends AppCompatActivity {
         btnSelectImg = (Button) findViewById(R.id.btn_select_img);
         btnAdd = (Button) findViewById(R.id.btn_add);
         btnGoBack = (Button) findViewById(R.id.btn_go_back);
+        imgProduct = (ImageView) findViewById(R.id.img_product);
 
         productServices = ProductRepository.getProductServices(this);
         brandServices = BrandRepository.getBrandServices(this);
