@@ -11,8 +11,6 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.milk_store_app.adapter.UserAdapter;
 import com.example.milk_store_app.models.entities.User;
-import com.example.milk_store_app.models.entities.Message;
-import com.example.milk_store_app.session.SessionManager;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -20,7 +18,6 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
 
 public class MessageListActivity extends AppCompatActivity {

@@ -10,11 +10,8 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.milk_store_app.R;
 import com.example.milk_store_app.models.entities.User;
-
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.List;
-import java.util.Locale;
+
 
 public class UserAdapter extends RecyclerView.Adapter<UserAdapter.UserViewHolder> {
     private List<User> userList;
