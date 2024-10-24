@@ -93,11 +93,17 @@ public class SignInActivity extends AppCompatActivity implements View.OnClickLis
                         }
                         String token = responseBody.string();
                         sessionManager.saveAuthToken(token);
-
-                        Intent intent = new Intent(SignInActivity.this, HomeViewActivity.class);
-                        startActivity(intent);
-                        finish();
-                        return;
+                        if(sessionManager.isCustomer()){
+                            Intent intent = new Intent(SignInActivity.this, ChatActivity.class);
+                            startActivity(intent);
+                            finish();
+                            return;
+                        } else if(sessionManager.fetchUserId().equals("5f3e80fd-3aeb-4480-872a-21db9b93b5ec")){
+                            Intent intent = new Intent(SignInActivity.this, MessageListActivity.class);
+                            startActivity(intent);
+                            finish();
+                            return;
+                        }
                     } catch (Exception e) {
                         showErrorDialog(SignInActivity.this, "Something went wrong");
                     }

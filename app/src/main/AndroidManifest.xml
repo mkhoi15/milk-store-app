@@ -41,6 +41,15 @@
             android:name=".CheckOutActivity"
             android:exported="false" />
         <activity
+            android:name=".ChatActivity"
+            android:exported="false" />
+        <activity
+            android:name=".StaffChatActivity"
+            android:exported="false" />
+        <activity
+            android:name=".MessageListActivity"
+            android:exported="false" />
+        <activity
             android:name=".SignInActivity"
             android:exported="true">
             <intent-filter>
