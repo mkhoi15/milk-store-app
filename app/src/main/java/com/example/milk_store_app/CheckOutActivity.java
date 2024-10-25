@@ -1,5 +1,7 @@
 package com.example.milk_store_app;
 
+import static android.content.ContentValues.TAG;
+
 import android.content.Intent;
 import android.nfc.Tag;
 import android.os.Build;
@@ -34,6 +36,7 @@ import com.example.milk_store_app.session.SessionManager;
 
 import org.json.JSONObject;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
@@ -177,6 +180,7 @@ public class CheckOutActivity extends AppCompatActivity {
         // Create a unique order code
         String orderCode = "ORDER-" + UUID.randomUUID().toString().substring(0, 8);
 
+        initializeOrderItems();
         //  private String userId;
         //    private String orderCode;
         //    private double totalPrice;
@@ -187,31 +191,39 @@ public class CheckOutActivity extends AppCompatActivity {
                 userId,
                 orderCode,
                 total,
-                currentUser.getAddress(),
-                currentUser.getPhoneNumber(),
+                addressTextView.getText().toString(),
+                phoneTextView.getText().toString(),
                 orderItems
         );
 
         OrderServices orderServices = apiClient.getOrderServices(this);
         Call<OrderResponse> call = orderServices.createOrdertest(orderRequest);
 
-        call.enqueue(new Callback<OrderResponse>() {
-            @Override
-            public void onResponse(Call<OrderResponse> call, Response<OrderResponse> response) {
-                if (response.isSuccessful() && response.body() != null) {
-                    // Clear cart here if you're maintaining a cart
-                     cartManager.clearCart();
-                    navigateToHome("Order " + orderCode + " placed successfully! Total: " + total);
-                } else {
-                  //  Log.e(TAG, "Order creation failed: " + response.code());
-                    navigateToHome("Payment successful but order creation failed");
-                }
-            }
+
+        call.enqueue(new Callback<OrderResponse>() {  // Changed from OrderResponse to Void
+
+           @Override
+           public void onResponse(Call<OrderResponse> call, Response<OrderResponse> response) {
+                   if (response.code() == 201) {
+                       // Trường hợp mã phản hồi là 204
+                       cartManager.clearCart();
+                       navigateToHome("Order " + orderCode + " placed successfully!  total: " + total);
+                   }
+               }
 
             @Override
             public void onFailure(Call<OrderResponse> call, Throwable t) {
-              //  Log.e(TAG, "Order creation failed", t);
-                navigateToHome("Payment successful but order creation failed");
+                // Log the network failure
+                Log.e(TAG, "Network error during order creation", t);
+
+                // Show error to user
+                runOnUiThread(() -> {
+                    Toast.makeText(CheckOutActivity.this,
+                            "Network error: " + t.getMessage(),
+                            Toast.LENGTH_LONG).show();
+                });
+
+                navigateToHome("Payment successful but order creation failed (Network error)");
             }
         });
     }
@@ -242,8 +254,9 @@ public class CheckOutActivity extends AppCompatActivity {
     }
 
     private void updateUserInterface(UserReponse userResponse) {
-        addressTextView.setText(userResponse.getAddress());
+//        addressTextView.setText(userResponse.getAddress());
         //addressTextView.setText("áda");
+        addressTextView.setText("FPT U");
 
         phoneTextView.setText(userResponse.getPhoneNumber());
         nameTextView.setText(userResponse.getFullName());
@@ -257,6 +270,13 @@ public class CheckOutActivity extends AppCompatActivity {
         finish();
     }
 
-
+    private void initializeOrderItems() {
+        orderItems = new ArrayList<>();
+        List<CartItems> cartItems = cartManager.getCart();
+        for (CartItems cartItem : cartItems) {
+            OrderItem orderItem = new OrderItem(cartItem.getProductId(), cartItem.getQuantity(),cartItem.getProductPrice());
+            orderItems.add(orderItem);
+        }
+    }
 
 }
