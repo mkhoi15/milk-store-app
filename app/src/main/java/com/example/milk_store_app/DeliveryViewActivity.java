@@ -45,7 +45,7 @@ public class DeliveryViewActivity extends AppCompatActivity {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
-        sessionManager = new SessionManager(this);
+
 
         // Initialize views and adapter
         projectData();
@@ -59,7 +59,7 @@ public class DeliveryViewActivity extends AppCompatActivity {
         adapter = new DeliveryStaffOrderAdapter(deliveryOrderList, this, R.layout.activity_single_order_delivery_view);
         recyclerOrder.setLayoutManager(new LinearLayoutManager(this));
         recyclerOrder.setAdapter(adapter);
-
+        sessionManager = new SessionManager(this);
         loadOrders(); // Load orders from API
     }
 
