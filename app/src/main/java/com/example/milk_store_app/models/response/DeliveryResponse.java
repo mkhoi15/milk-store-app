@@ -1,7 +1,6 @@
 package com.example.milk_store_app.models.response;
 
 import java.io.Serializable;
-import java.math.BigDecimal;
 import java.util.UUID;
 
 import lombok.AllArgsConstructor;
@@ -13,15 +12,12 @@ import lombok.Setter;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public final class ProductResponse implements Serializable {
+public class DeliveryResponse implements Serializable {
     private UUID id;
-    private String name;
-    private String description;
-    private BigDecimal price;
-    private int stock;
-    private String imageUrl;
-    private boolean isDeleted;
-    private String brandName;
-
-
+    private UUID orderId;
+    private UUID deliveryStaffId;
+    private String deliveryDate;
+    private String deliveryStaffName;
+    private OrderDeliveryResponse order;
 }
+

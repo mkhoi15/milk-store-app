@@ -1,27 +1,24 @@
-package com.example.milk_store_app.models.response;
+package com.example.milk_store_app.models.request;
 
-import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.UUID;
 
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Getter
 @Setter
+@Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public final class ProductResponse implements Serializable {
-    private UUID id;
+public class ProductCreateRequest {
     private String name;
     private String description;
     private BigDecimal price;
     private int stock;
     private String imageUrl;
-    private boolean isDeleted;
-    private String brandName;
-
-
+    private UUID brandId;
 }

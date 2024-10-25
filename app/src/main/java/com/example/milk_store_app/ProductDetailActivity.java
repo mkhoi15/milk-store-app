@@ -2,6 +2,7 @@ package com.example.milk_store_app;
 
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -20,6 +21,8 @@ import com.example.milk_store_app.models.response.ProductResponse;
 import com.example.milk_store_app.repository.ProductRepository;
 import com.example.milk_store_app.services.ProductServices;
 import com.example.milk_store_app.session.CartManager;
+import com.example.milk_store_app.session.SessionManager;
+import com.example.milk_store_app.untils.NumberHelper;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -31,16 +34,16 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class ProductDetailActivity extends AppCompatActivity {
+public class ProductDetailActivity extends AppCompatActivity implements ProductDialog.ProductUpdateListener {
     ProductServices productServices;
     TextView productName, productPrice, productDescription;
     TextView productStock;
     ImageView productImage;
     Button btnAddToCart, btnGoBack;
     CartManager cartManager;
+    SessionManager sessionManager;
     private String productId;
     ProductResponse product;
-//    ExecutorService executorService;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -69,38 +72,27 @@ public class ProductDetailActivity extends AppCompatActivity {
         btnGoBack = findViewById(R.id.btn_go_back);
 
         cartManager = new CartManager(this);
-//        executorService = Executors.newSingleThreadExecutor();
+        sessionManager = new SessionManager(this);
+
+        if (sessionManager.isAdmin()) {
+            btnAddToCart.setText("Edit Product");
+        }
 
         String productId = getIntent().getStringExtra("productId");
         if (productId != null) {
             this.productId = productId;
             loadProduct(productId);
         }
-
-//        loadCartItems();
     }
 
-//    private void loadCartItems() {
-//        executorService.execute(() -> {
-//            List<CartItems> cartItems = cartManager.getCart(); // Retrieve cart items
-//
-//            runOnUiThread(() -> {
-//                // Update UI with cart items
-//                if (cartItems != null) {
-//                    // Handle the cart items
-//                }
-//            });
-//        });
-//    }
-//
-//    @Override
-//    protected void onDestroy() {
-//        super.onDestroy();
-//        executorService.shutdown(); // Clean up the executor
-//    }
 
     private void addListeners() {
         btnAddToCart.setOnClickListener(v -> {
+            if (sessionManager.isAdmin()) {
+                // Edit product
+                openProductEditDialog();
+                return;
+            }
             if (product == null) {
                 Toast.makeText(this, "Product not found", Toast.LENGTH_SHORT).show();
                 return;
@@ -112,6 +104,13 @@ public class ProductDetailActivity extends AppCompatActivity {
         btnGoBack.setOnClickListener(v -> {
             finish();
         });
+    }
+
+    private void openProductEditDialog() {
+        // Create and show the ProductDialog for editing the product
+        ProductDialog productDialog = ProductDialog.newInstance(product);
+        productDialog.setProductUpdateListener(this);
+        productDialog.show(getSupportFragmentManager(), "ProductDialog");
     }
 
     private void loadProduct(String productId) {
@@ -138,7 +137,7 @@ public class ProductDetailActivity extends AppCompatActivity {
                         productImage.setImageResource(R.drawable.ic_launcher_background);
                     }
                     productName.setText(product.getName());
-                    String priceFormatted = String.format(getString(R.string.product_price), product.getPrice());
+                    String priceFormatted = String.format(getString(R.string.product_price), NumberHelper.formatNumber(product.getPrice()));
                     productPrice.setText(priceFormatted);
                     String stockFormatted = String.format(getString(R.string.product_stock), product.getStock());
                     productStock.setText(stockFormatted);
@@ -157,5 +156,10 @@ public class ProductDetailActivity extends AppCompatActivity {
                 builder.show();
             }
         });
+    }
+
+    @Override
+    public void onProductUpdated() {
+        loadProduct(productId);
     }
 }

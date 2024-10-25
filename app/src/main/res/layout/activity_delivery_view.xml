@@ -2,28 +2,36 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical"
     android:id="@+id/main"
-    android:padding="16dp">
+    android:padding="16dp"
+    tools:context=".DeliveryViewActivity">
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Order Management"
+        android:text="Delivery Staff Order Management"
         android:textSize="24sp"
         android:textStyle="bold"
         android:layout_marginBottom="16dp"/>
 
-    <SearchView
-        android:id="@+id/searchViewOrders"
+    <TextView
+        android:id="@+id/textViewDeliveryManName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Delivery Man: "
+        android:textSize="18sp"
+        android:layout_marginBottom="16dp"/>
+
+    <Spinner
+        android:id="@+id/spinnerDeliveryStatus"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:queryHint="Search orders..."
-        android:iconifiedByDefault="false"
         android:layout_marginBottom="16dp"/>
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recyclerViewStaffOrders"
+        android:id="@+id/recyclerViewDeliveryStaffOrders"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
 

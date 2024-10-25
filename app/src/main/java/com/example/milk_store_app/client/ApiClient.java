@@ -7,6 +7,7 @@ import androidx.annotation.NonNull;
 import com.example.milk_store_app.client.interceptor.AuthInterceptor;
 import com.example.milk_store_app.constants.Constants;
 import com.example.milk_store_app.services.AuthService;
+import com.example.milk_store_app.services.DeliveryServices;
 import com.example.milk_store_app.services.OrderServices;
 import com.example.milk_store_app.services.ProductServices;
 import com.example.milk_store_app.services.UserService;
@@ -14,6 +15,7 @@ import com.example.milk_store_app.services.UserService;
 import okhttp3.OkHttpClient;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
+import retrofit2.converter.scalars.ScalarsConverterFactory;
 
 public class ApiClient {
     private Retrofit retrofit;
@@ -22,6 +24,7 @@ public class ApiClient {
         if (retrofit == null) {
             retrofit = new Retrofit.Builder()
                 .baseUrl(Constants.BASE_URL)
+                .addConverterFactory(ScalarsConverterFactory.create())
                 .addConverterFactory(GsonConverterFactory.create())
                 .client(createOkHttpClient(context))
                 .build();
@@ -51,5 +54,7 @@ public class ApiClient {
 
     public UserService getUserServices(Context context) {
         return createRetrofit(context).create(UserService.class);
+    public DeliveryServices getDeliveryServices(Context context) {
+        return createRetrofit(context).create(DeliveryServices.class);
     }
 }

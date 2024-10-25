@@ -19,6 +19,13 @@ public interface OrderServices {
 
     @POST(Constants.ORDER_URL)
     Call<OrderResponse> createOrdertest(@Body PostOrderRequest request);
+    @GET(Constants.ORDER_URL)
+    Call<List<OrderResponse>> getOrders(
+            @Query("pageIndex") int pageIndex,
+            @Query("pageSize") int pageSize,
+            @Query("searchString") String searchString,
+            @Query("searchBy") String searchBy
+    );
 
     @GET(Constants.ORDER_URL + "/user/{id}")
     Call<List<OrderResponse>> getOrdersByUserId(
