@@ -12,6 +12,10 @@
                   <option name="mobileSdkAppId" value="" />
                   <option name="projectId" value="" />
                   <option name="projectNumber" value="" />
+                  <option name="appId" value="com.example.milk_store_app" />
+                  <option name="mobileSdkAppId" value="1:647947909652:android:7bd8c803e62f406bff4501" />
+                  <option name="projectId" value="prm392-chatbox" />
+                  <option name="projectNumber" value="647947909652" />
                 </ConnectionSetting>
               </option>
               <option name="signal" value="SIGNAL_UNSPECIFIED" />

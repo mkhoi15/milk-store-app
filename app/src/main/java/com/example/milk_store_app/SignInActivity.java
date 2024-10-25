@@ -105,6 +105,17 @@ public class SignInActivity extends AppCompatActivity implements View.OnClickLis
                         startActivity(intent);
                         finish();
                         return;
+                        if(sessionManager.isCustomer()){
+                            Intent intent = new Intent(SignInActivity.this, MainActivity.class);
+                            startActivity(intent);
+                            finish();
+                            return;
+                        } else if(sessionManager.fetchUserId().equals("5f3e80fd-3aeb-4480-872a-21db9b93b5ec")){
+                            Intent intent = new Intent(SignInActivity.this, MessageListActivity.class);
+                            startActivity(intent);
+                            finish();
+                            return;
+                        }
                     } catch (Exception e) {
                         showErrorDialog(SignInActivity.this, "Something went wrong");
                     }
