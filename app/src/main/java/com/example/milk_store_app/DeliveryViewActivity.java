@@ -45,6 +45,7 @@ public class DeliveryViewActivity extends AppCompatActivity {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
+        sessionManager = new SessionManager(this);
 
         // Initialize views and adapter
         projectData();
