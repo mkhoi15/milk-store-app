@@ -94,6 +94,13 @@ public class SignInActivity extends AppCompatActivity implements View.OnClickLis
                         String token = responseBody.string();
                         sessionManager.saveAuthToken(token);
 
+                        if (sessionManager.isDeliveryStaff()) {
+                            Intent intent = new Intent(SignInActivity.this, DeliveryViewActivity.class);
+                            startActivity(intent);
+                            finish();
+                            return;
+                        }
+
                         Intent intent = new Intent(SignInActivity.this, HomeViewActivity.class);
                         startActivity(intent);
                         finish();
