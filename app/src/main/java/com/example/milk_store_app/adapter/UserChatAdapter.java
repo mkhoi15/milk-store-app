@@ -9,16 +9,16 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.milk_store_app.R;
-import com.example.milk_store_app.models.entities.User;
+import com.example.milk_store_app.models.entities.UserChat;
 import java.util.List;
 
 
-public class UserAdapter extends RecyclerView.Adapter<UserAdapter.UserViewHolder> {
-    private List<User> userList;
+public class UserChatAdapter extends RecyclerView.Adapter<UserChatAdapter.UserViewHolder> {
+    private List<UserChat> userChatList;
     private OnUserMessageClickListener listener;
 
-    public UserAdapter(List<User> userList, OnUserMessageClickListener listener) {
-        this.userList = userList;
+    public UserChatAdapter(List<UserChat> userChatList, OnUserMessageClickListener listener) {
+        this.userChatList = userChatList;
         this.listener = listener;
     }
 
@@ -31,17 +31,17 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.UserViewHolder
 
     @Override
     public void onBindViewHolder(@NonNull UserViewHolder holder, int position) {
-        User user = userList.get(position);
-        holder.textViewUserName.setText(user.getUserName());
-        holder.textViewLastMessage.setText(user.getLastMessage());
+        UserChat userChat = userChatList.get(position);
+        holder.textViewUserName.setText(userChat.getUserName());
+        holder.textViewLastMessage.setText(userChat.getLastMessage());
 
         // Format the timestamp to a readable date format
-        holder.itemView.setOnClickListener(v -> listener.onUserMessageClick(user));
+        holder.itemView.setOnClickListener(v -> listener.onUserMessageClick(userChat));
     }
 
     @Override
     public int getItemCount() {
-        return userList.size();
+        return userChatList.size();
     }
 
     static class UserViewHolder extends RecyclerView.ViewHolder {
@@ -58,6 +58,6 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.UserViewHolder
     }
 
     public interface OnUserMessageClickListener {
-        void onUserMessageClick(User user);
+        void onUserMessageClick(UserChat userChat);
     }
 }

@@ -1,14 +1,14 @@
 package com.example.milk_store_app.models.entities;
 
-public class User {
+public class UserChat {
     private String userId;
     private String userName; // or customer name
     private String lastMessage;
 
     // Default constructor
-    public User() {}
+    public UserChat() {}
 
-    public User(String userId, String userName, String lastMessage) {
+    public UserChat(String userId, String userName, String lastMessage) {
         this.userId = userId;
         this.userName = userName;
         this.lastMessage = lastMessage;

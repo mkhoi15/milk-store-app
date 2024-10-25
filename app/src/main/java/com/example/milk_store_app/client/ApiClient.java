@@ -9,6 +9,7 @@ import com.example.milk_store_app.constants.Constants;
 import com.example.milk_store_app.services.AuthService;
 import com.example.milk_store_app.services.OrderServices;
 import com.example.milk_store_app.services.ProductServices;
+import com.example.milk_store_app.services.UserServices;
 
 import okhttp3.OkHttpClient;
 import retrofit2.Retrofit;
@@ -48,5 +49,9 @@ public class ApiClient {
 
     public OrderServices getOrderServices(Context context) {
         return createRetrofit(context).create(OrderServices.class);
+    }
+
+    public UserServices getUserServices(Context context) {
+        return createRetrofit(context).create(UserServices.class);
     }
 }

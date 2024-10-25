@@ -24,12 +24,12 @@ public class ProductAdapter extends BaseAdapter {
 
     @Override
     public int getCount() {
-        return productList.size();
+        return (productList.size() + 1) / 2; // Two products per row
     }
 
     @Override
     public Object getItem(int position) {
-        return productList.get(position);
+        return productList.get(position * 2); // Return the first item in the row pair
     }
 
     @Override
@@ -38,8 +38,13 @@ public class ProductAdapter extends BaseAdapter {
     }
 
     private static class ViewHolder {
-        ImageView imgProduct;
-        TextView tvProductName, tvStock, tvPrice, tvDescription;
+        // Left product views
+        ImageView imgProductLeft;
+        TextView tvProductNameLeft, tvStockLeft, tvPriceLeft, tvDescriptionLeft;
+
+        // Right product views
+        ImageView imgProductRight;
+        TextView tvProductNameRight, tvStockRight, tvPriceRight, tvDescriptionRight;
     }
 
     @Override
@@ -48,33 +53,71 @@ public class ProductAdapter extends BaseAdapter {
         if (convertView == null) {
             convertView = View.inflate(context, layout, null);
             holder = new ViewHolder();
-            holder.imgProduct = convertView.findViewById(R.id.imgProductImg);
-            holder.tvProductName = convertView.findViewById(R.id.product_name);
-            holder.tvStock = convertView.findViewById(R.id.product_stock);
-            holder.tvPrice = convertView.findViewById(R.id.product_price);
-            holder.tvDescription = convertView.findViewById(R.id.product_description);
+
+            // Left product views
+            holder.imgProductLeft = convertView.findViewById(R.id.imgProductImgLeft);
+            holder.tvProductNameLeft = convertView.findViewById(R.id.product_name_left);
+            holder.tvStockLeft = convertView.findViewById(R.id.product_stock_left);
+            holder.tvPriceLeft = convertView.findViewById(R.id.product_price_left);
+            holder.tvDescriptionLeft = convertView.findViewById(R.id.product_description_left);
+
+            // Right product views
+            holder.imgProductRight = convertView.findViewById(R.id.imgProductImgRight);
+            holder.tvProductNameRight = convertView.findViewById(R.id.product_name_right);
+            holder.tvStockRight = convertView.findViewById(R.id.product_stock_right);
+            holder.tvPriceRight = convertView.findViewById(R.id.product_price_right);
+            holder.tvDescriptionRight = convertView.findViewById(R.id.product_description_right);
+
             convertView.setTag(holder);
         } else {
             holder = (ViewHolder) convertView.getTag();
         }
 
-        ProductResponse product = productList.get(position);
+        // Bind the left product in the row
+        ProductResponse leftProduct = productList.get(position * 2);
+        bindProduct(holder.imgProductLeft, holder.tvProductNameLeft, holder.tvStockLeft,
+                holder.tvPriceLeft, holder.tvDescriptionLeft, leftProduct);
+
+        // Bind the right product if it exists
+        if (position * 2 + 1 < productList.size()) {
+            ProductResponse rightProduct = productList.get(position * 2 + 1);
+            bindProduct(holder.imgProductRight, holder.tvProductNameRight, holder.tvStockRight,
+                    holder.tvPriceRight, holder.tvDescriptionRight, rightProduct);
+
+            holder.imgProductRight.setVisibility(View.VISIBLE);
+            holder.tvProductNameRight.setVisibility(View.VISIBLE);
+            holder.tvStockRight.setVisibility(View.VISIBLE);
+            holder.tvPriceRight.setVisibility(View.VISIBLE);
+            holder.tvDescriptionRight.setVisibility(View.VISIBLE);
+        } else {
+            // Hide the right product views if no right product exists
+            holder.imgProductRight.setVisibility(View.INVISIBLE);
+            holder.tvProductNameRight.setVisibility(View.INVISIBLE);
+            holder.tvStockRight.setVisibility(View.INVISIBLE);
+            holder.tvPriceRight.setVisibility(View.INVISIBLE);
+            holder.tvDescriptionRight.setVisibility(View.INVISIBLE);
+        }
+
+        return convertView;
+    }
+
+    private void bindProduct(ImageView imgProduct, TextView tvProductName, TextView tvStock,
+                             TextView tvPrice, TextView tvDescription, ProductResponse product) {
         if (product.getImageUrl() != null && !product.getImageUrl().isEmpty()) {
             Glide.with(context)
                     .load(product.getImageUrl())
-                    .into(holder.imgProduct);
+                    .into(imgProduct);
         } else {
-            holder.imgProduct.setImageResource(R.drawable.ic_launcher_background);
+            imgProduct.setImageResource(R.drawable.ic_launcher_background);
         }
-        holder.tvProductName.setText(product.getName());
 
+        tvProductName.setText(product.getName());
         String stockFormatted = String.format(context.getResources().getString(R.string.product_stock), product.getStock());
-        holder.tvStock.setText(stockFormatted);
+        tvStock.setText(stockFormatted);
 
         String priceFormatted = String.format(context.getResources().getString(R.string.product_price), NumberHelper.formatNumber(product.getPrice()));
-        holder.tvPrice.setText(priceFormatted);
+        tvPrice.setText(priceFormatted);
 
-        holder.tvDescription.setText(product.getDescription());
-        return convertView;
+        tvDescription.setText(product.getDescription());
     }
 }

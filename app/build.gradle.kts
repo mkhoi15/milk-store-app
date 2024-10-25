@@ -53,5 +53,6 @@ dependencies {
     implementation(platform("com.google.firebase:firebase-bom:33.5.0"))
     implementation("com.google.firebase:firebase-analytics")
     implementation("com.google.firebase:firebase-database:20.3.0")
+    implementation("com.github.denzcoskun:ImageSlideshow:0.1.0")
 }
 apply(plugin = "com.google.gms.google-services")

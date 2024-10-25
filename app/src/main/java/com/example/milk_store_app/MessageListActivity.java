@@ -9,8 +9,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.milk_store_app.adapter.UserAdapter;
-import com.example.milk_store_app.models.entities.User;
+import com.example.milk_store_app.adapter.UserChatAdapter;
+import com.example.milk_store_app.models.entities.UserChat;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -23,8 +23,8 @@ import java.util.List;
 public class MessageListActivity extends AppCompatActivity {
 
     private RecyclerView recyclerViewMessages;
-    private UserAdapter userMessageAdapter;
-    private List<User> userMessageList;
+    private UserChatAdapter userMessageAdapter;
+    private List<UserChat> userChatMessageList;
     private DatabaseReference userRef;
 
     @Override
@@ -33,10 +33,10 @@ public class MessageListActivity extends AppCompatActivity {
         setContentView(R.layout.activity_message_list);
 
         recyclerViewMessages = findViewById(R.id.recyclerViewMessages);
-        userMessageList = new ArrayList<>();
-        userMessageAdapter = new UserAdapter(userMessageList, userMessage -> {
+        userChatMessageList = new ArrayList<>();
+        userMessageAdapter = new UserChatAdapter(userChatMessageList, userChatMessage -> {
             // Handle user message click
-            openChat(userMessage.getUserId());
+            openChat(userChatMessage.getUserId());
         });
 
         recyclerViewMessages.setLayoutManager(new LinearLayoutManager(this));
@@ -53,11 +53,11 @@ public class MessageListActivity extends AppCompatActivity {
         userRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                userMessageList.clear(); // Clear the previous list
+                userChatMessageList.clear(); // Clear the previous list
                 for (DataSnapshot userSnapshot : dataSnapshot.getChildren()) {
-                    User user = userSnapshot.getValue(User.class);
-                    if (user != null) {
-                        userMessageList.add(user); // Add each user to the list
+                    UserChat userChat = userSnapshot.getValue(UserChat.class);
+                    if (userChat != null) {
+                        userChatMessageList.add(userChat); // Add each user to the list
                     }
                 }
                 userMessageAdapter.notifyDataSetChanged(); // Notify adapter of changes

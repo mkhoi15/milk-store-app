@@ -94,7 +94,7 @@ public class SignInActivity extends AppCompatActivity implements View.OnClickLis
                         String token = responseBody.string();
                         sessionManager.saveAuthToken(token);
                         if(sessionManager.isCustomer()){
-                            Intent intent = new Intent(SignInActivity.this, ChatActivity.class);
+                            Intent intent = new Intent(SignInActivity.this, MainActivity.class);
                             startActivity(intent);
                             finish();
                             return;
