@@ -5,7 +5,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -13,17 +12,11 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
-import com.example.milk_store_app.models.response.ProductResponse;
 import com.example.milk_store_app.models.response.UserResponse;
-import com.example.milk_store_app.repository.ProductRepository;
 import com.example.milk_store_app.repository.UserRepository;
 import com.example.milk_store_app.services.UserServices;
-import com.example.milk_store_app.session.CartManager;
 import com.example.milk_store_app.session.SessionManager;
-
-import java.util.List;
 import java.util.UUID;
-
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;

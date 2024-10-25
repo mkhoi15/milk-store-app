@@ -1,6 +1,5 @@
 package com.example.milk_store_app.models.response;
 
-import java.math.BigDecimal;
 import java.util.UUID;
 
 import lombok.AllArgsConstructor;
