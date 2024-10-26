@@ -101,10 +101,6 @@ public class SignInActivity extends AppCompatActivity implements View.OnClickLis
                             return;
                         }
 
-                        Intent intent = new Intent(SignInActivity.this, HomeViewActivity.class);
-                        startActivity(intent);
-                        finish();
-                        return;
                         if(sessionManager.isCustomer()){
                             Intent intent = new Intent(SignInActivity.this, MainActivity.class);
                             startActivity(intent);
@@ -116,6 +112,7 @@ public class SignInActivity extends AppCompatActivity implements View.OnClickLis
                             finish();
                             return;
                         }
+
                     } catch (Exception e) {
                         showErrorDialog(SignInActivity.this, "Something went wrong");
                     }
