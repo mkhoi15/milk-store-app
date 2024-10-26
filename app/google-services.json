@@ -1,0 +1,30 @@
+{
+  "project_info": {
+    "project_number": "647947909652",
+    "firebase_url": "https://prm392-chatbox-default-rtdb.firebaseio.com",
+    "project_id": "prm392-chatbox",
+    "storage_bucket": "prm392-chatbox.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:647947909652:android:7bd8c803e62f406bff4501",
+        "android_client_info": {
+          "package_name": "com.example.milk_store_app"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyByw1U95hvbMrd18kljVKkqEJ-kEfoy7mc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

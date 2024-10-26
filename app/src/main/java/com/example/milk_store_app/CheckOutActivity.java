@@ -3,7 +3,6 @@ package com.example.milk_store_app;
 import static android.content.ContentValues.TAG;
 
 import android.content.Intent;
-import android.nfc.Tag;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.StrictMode;
@@ -22,21 +21,18 @@ import androidx.core.view.WindowInsetsCompat;
 
 import com.example.milk_store_app.client.ApiClient;
 import com.example.milk_store_app.client.ZalopayLibary;
-import com.example.milk_store_app.database.CartDatabase;
 import com.example.milk_store_app.models.entities.CartItems;
 import com.example.milk_store_app.models.entities.OrderItem;
 import com.example.milk_store_app.models.request.PostOrderRequest;
 import com.example.milk_store_app.models.response.OrderResponse;
 import com.example.milk_store_app.models.response.UserReponse;
 import com.example.milk_store_app.services.OrderServices;
-import com.example.milk_store_app.services.ProductServices;
-import com.example.milk_store_app.services.UserService;
+import com.example.milk_store_app.services.UserServices;
 import com.example.milk_store_app.session.CartManager;
 import com.example.milk_store_app.session.SessionManager;
 
 import org.json.JSONObject;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
@@ -232,7 +228,7 @@ public class CheckOutActivity extends AppCompatActivity {
         userId = sessionManager.fetchUserId();
         apiClient = new ApiClient();
 
-        UserService userService = apiClient.getUserServices(this);
+        UserServices userService = apiClient.getUserServices(this);
         Call<UserReponse> call = userService.getUserById(userId);
 
         call.enqueue(new Callback<UserReponse>() {
