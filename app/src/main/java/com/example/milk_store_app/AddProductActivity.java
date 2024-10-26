@@ -64,7 +64,6 @@ public class AddProductActivity extends AppCompatActivity {
     BrandResponse selectedBrand;
     Uri selectedImageUri;
     ActivityResultLauncher<Intent> resultLauncher;
-    String imageUrl; //This is the image url that we will receive after upload picture
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -118,37 +117,50 @@ public class AddProductActivity extends AppCompatActivity {
             try {
                 imagePart = PrepareFilePart(selectedImageUri);
                 //Upload image
-                imageUrl = productServices.uploadImage(imagePart).execute().body();
-                if (!imageUrl.isEmpty()){
-                    productServices.createProduct(new ProductCreateRequest(
-                                    name,
-                                    description,
-                                    BigDecimal.valueOf(Long.parseLong(price)),
-                                    Integer.parseInt(stock),
-                                    imageUrl,
-                                    UUID.fromString(brandId)
-                            )
-                    ).enqueue(
-                            new Callback<ProductResponse>() {
-                                @Override
-                                public void onResponse(Call<ProductResponse> call, Response<ProductResponse> response) {
-                                    if (response.isSuccessful()) {
-                                        Toast.makeText(AddProductActivity.this, "Add product successfully!", Toast.LENGTH_SHORT).show();
-                                        finish();
-                                    } else {
-                                        Toast.makeText(AddProductActivity.this, "Add product failed!", Toast.LENGTH_SHORT).show();
-                                    }
-                                }
-                                @Override
-                                public void onFailure(Call<ProductResponse> call, Throwable t) {
+                productServices.uploadImage(imagePart).enqueue(
+                        new Callback<String>() {
+                            @Override
+                            public void onResponse(Call<String> call, Response<String> response) {
+                                if(response.isSuccessful() && response.body() != null){
+                                    String imageUrl = response.body();
+                                    CreateProduct(imageUrl, brandId, name, price, stock, description);
                                 }
                             }
-                    );
-                }
+                            @Override
+                            public void onFailure(Call<String> call, Throwable t) {
+
+                            }
+                        });
             } catch (Exception e) {
                 throw new RuntimeException(e);
             }
         });
+    }
+    private void CreateProduct(String imageUrl, String brandId, String name, String price, String stock, String description){
+        productServices.createProduct(new ProductCreateRequest(
+                        name,
+                        description,
+                        BigDecimal.valueOf(Long.parseLong(price)),
+                        Integer.parseInt(stock),
+                        imageUrl,
+                        UUID.fromString(brandId)
+                )
+        ).enqueue(
+                new Callback<ProductResponse>() {
+                    @Override
+                    public void onResponse(Call<ProductResponse> call, Response<ProductResponse> response) {
+                        if (response.isSuccessful()) {
+                            Toast.makeText(AddProductActivity.this, "Add product successfully!", Toast.LENGTH_SHORT).show();
+                            finish();
+                        } else {
+                            Toast.makeText(AddProductActivity.this, "Add product failed!", Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                    @Override
+                    public void onFailure(Call<ProductResponse> call, Throwable t) {
+                    }
+                }
+        );
     }
     // Helper method to read InputStream into a byte array
     private byte[] getBytesFromInputStream(InputStream inputStream) throws IOException {
