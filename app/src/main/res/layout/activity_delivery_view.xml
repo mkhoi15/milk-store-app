@@ -24,11 +24,50 @@
         android:textSize="18sp"
         android:layout_marginBottom="16dp"/>
 
-    <Spinner
-        android:id="@+id/spinnerDeliveryStatus"
+<!--    <Spinner-->
+<!--        android:id="@+id/spinnerDeliveryStatus"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_marginBottom="16dp"-->
+<!--        android:entries="@array/delivery_status_array" />-->
+    <!-- Button layout for filtering -->
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="16dp"/>
+        android:orientation="horizontal"
+        android:gravity="center"
+        android:layout_marginBottom="16dp">
+
+        <Button
+            android:id="@+id/buttonAll"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="All" />
+
+        <Button
+            android:id="@+id/buttonAssigned"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Assigned" />
+
+        <Button
+            android:id="@+id/buttonShipping"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Shipping" />
+
+        <Button
+            android:id="@+id/buttonDelivered"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Deliver" />
+    </LinearLayout>
+
+
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerViewDeliveryStaffOrders"

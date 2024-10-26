@@ -4,6 +4,10 @@ import android.os.Bundle;
 import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 import com.example.milk_store_app.models.response.DeliveryResponse;
+import com.example.milk_store_app.untils.DateTimeHelper;
+import com.example.milk_store_app.untils.NumberHelper;
+
+import java.time.LocalDateTime;
 
 public class OrderDeliveryDetailActivity extends AppCompatActivity {
 
@@ -35,11 +39,12 @@ public class OrderDeliveryDetailActivity extends AppCompatActivity {
 
     private void updateUI() {
         tvOrderId.setText("Order: " + deliveryResponse.getOrderId());
-        tvDeliveryManName.setText("Delivery Man: " + deliveryResponse.getDeliveryStaffName());
+        tvDeliveryManName.setText("Delivery Man: " + deliveryResponse.getDeliveryManName());
         tvCustomerName.setText("Customer: " + deliveryResponse.getOrder().getCustomerName());
-        tvOrderDate.setText("Order Date: " + deliveryResponse.getOrder().getOrderDate());
+        LocalDateTime orderDate = DateTimeHelper.parseStringToLocalDateTime(deliveryResponse.getOrder().getOrderDate());
+        tvOrderDate.setText("Order Date: " + DateTimeHelper.formatLocalDateTimeToString(orderDate));
         tvOrderStatus.setText("Status: " + deliveryResponse.getOrder().getOrderStatus());
-        tvTotalPrice.setText("Total: " + deliveryResponse.getOrder().getTotalPrice());
+        tvTotalPrice.setText("Total: " + NumberHelper.formatNumber(deliveryResponse.getOrder().getTotalPrice()));
         tvAddress.setText("Address: " + deliveryResponse.getOrder().getAddress());
         tvPhoneNumber.setText("Phone: " + deliveryResponse.getOrder().getPhoneNumber());
     }

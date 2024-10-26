@@ -19,5 +19,5 @@ public class OrderDeliveryResponse implements Serializable {
     private String orderCode;
     private String orderDate;
     private BigDecimal totalPrice;
-    private String OrderStatus;
+    private String orderStatus;
 }

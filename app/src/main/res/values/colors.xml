@@ -6,4 +6,7 @@
     <color name="dark_green">#73a843</color>
     <color name="yellow">#FEEC37</color>
     <color name="orange">#FFA24C</color>
+
+    <color name="button_selected">#FF8800</color> <!-- example selected color -->
+    <color name="button_unselected">#CCCCCC</color> <!-- example unselected color -->
 </resources>
