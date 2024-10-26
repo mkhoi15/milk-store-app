@@ -20,4 +20,10 @@ public interface DeliveryServices {
             @Query("pageIndex") int pageIndex,
             @Query("pageSize") int pageSize
     );
+
+    @GET(Constants.DELIVERY_URL + "/{id}")
+    Call<DeliveryResponse> getDeliveryById(
+            @Path("id") @NonNull String deliveryId
+    );
+
 }
