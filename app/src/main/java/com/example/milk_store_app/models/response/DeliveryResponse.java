@@ -17,7 +17,7 @@ public class DeliveryResponse implements Serializable {
     private UUID orderId;
     private UUID deliveryStaffId;
     private String deliveryDate;
-    private String deliveryStaffName;
+    private String deliveryManName;
     private OrderDeliveryResponse order;
 }
 

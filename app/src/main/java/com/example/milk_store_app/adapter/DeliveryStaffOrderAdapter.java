@@ -77,6 +77,7 @@ public class DeliveryStaffOrderAdapter extends RecyclerView.Adapter<DeliveryStaf
             tvOrderTotal = itemView.findViewById(R.id.textDeliveryOrderTotal);
         }
     }
+
 }
 
 

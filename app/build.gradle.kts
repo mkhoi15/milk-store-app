@@ -52,6 +52,13 @@ dependencies {
         "include" to listOf("*.aar", "*.jar"),
         "exclude" to listOf("")
     )))
+
+    implementation(fileTree(mapOf(
+        "dir" to "E:\\Program\\ZalopaySdk",
+        "include" to listOf("*.aar", "*.jar"),
+        "exclude" to listOf("")
+    )))
+
     compileOnly(libs.lombok)
     testImplementation(libs.junit)
     androidTestImplementation(libs.ext.junit)
