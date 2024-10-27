@@ -76,6 +76,8 @@ public class OrderDeliveryDetailActivity extends AppCompatActivity {
             btnUpdateOrder.setText("Make Delivery Shipping");
         } else if ("Shipping".equalsIgnoreCase(status)) {
             btnUpdateOrder.setText("Delivered Order");
+        } else {
+            btnUpdateOrder.setVisibility(View.GONE);
         }
 
     }
