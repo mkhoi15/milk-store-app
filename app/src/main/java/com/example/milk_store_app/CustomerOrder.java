@@ -14,6 +14,8 @@ import com.example.milk_store_app.adapter.OrderAdapter;
 import com.example.milk_store_app.models.response.OrderResponse;
 import com.example.milk_store_app.repository.OrderRepository;
 import com.example.milk_store_app.services.OrderServices;
+import com.example.milk_store_app.session.SessionManager;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -27,6 +29,7 @@ public class CustomerOrder extends Fragment {
     List<OrderResponse> orderList;
     OrderAdapter adapter;
     RecyclerView recyclerOrder;
+    SessionManager sessionManager;
 
     @Nullable
     @Override
@@ -44,6 +47,8 @@ public class CustomerOrder extends Fragment {
         adapter = new OrderAdapter(orderList, requireContext(), R.layout.activity_history_order_customer);
         recyclerOrder.setLayoutManager(new LinearLayoutManager(getContext()));
         recyclerOrder.setAdapter(adapter);
+
+        sessionManager = new SessionManager(requireContext());
 
         loadOrders();
     }

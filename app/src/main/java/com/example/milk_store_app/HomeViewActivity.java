@@ -53,7 +53,7 @@ public class HomeViewActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
-        setContentView(R.layout.activity_home_view);
+        setContentView(R.layout.fragment_customer_home);
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
@@ -108,7 +108,6 @@ public class HomeViewActivity extends AppCompatActivity {
         btnSearch = (Button) findViewById(R.id.btn_search);
         btnCart = (Button) findViewById(R.id.btn_cart);
         listView.setAdapter(adapter);
-        btnOrderHistory = (Button) findViewById(R.id.btn_order_history);
 
         productServices = ProductRepository.getProductServices(this);
         cartManager = new CartManager(this);
