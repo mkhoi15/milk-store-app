@@ -46,7 +46,7 @@ public class CustomerOrderHistoryActivity extends AppCompatActivity {
         recyclerOrder = findViewById(R.id.recyclerViewOrders);
         orderServices = OrderRepository.getOrderServices(this);
         orderList = new ArrayList<>();
-        adapter = new OrderAdapter(orderList, this, R.layout.activity_history_order_customer);
+        adapter = new OrderAdapter(orderList, this, R.layout.customer_order_item);
         recyclerOrder.setLayoutManager(new LinearLayoutManager(this));
         recyclerOrder.setAdapter(adapter);
 

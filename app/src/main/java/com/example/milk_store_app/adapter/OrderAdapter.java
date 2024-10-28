@@ -1,6 +1,7 @@
 package com.example.milk_store_app.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -9,6 +10,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.milk_store_app.CustomerOrderDetailActivity;
 import com.example.milk_store_app.R;
 import com.example.milk_store_app.models.response.OrderResponse;
 import com.example.milk_store_app.untils.DateTimeHelper;
@@ -32,6 +34,7 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.OrderViewHol
         return new OrderViewHolder(view);
     }
 
+
     @Override
     public void onBindViewHolder(@NonNull OrderViewHolder holder, int position) {
         OrderResponse order = orderList.get(position);
@@ -41,6 +44,11 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.OrderViewHol
         holder.tvOrderDate.setText("Order Date: " + readableDate);
         holder.tvOrderTotal.setText("Order Total: " + NumberHelper.formatNumber(order.getTotalPrice()));
         holder.tvOrderStatus.setText("Order Status: " + order.getOrderStatus());
+        holder.itemView.setOnClickListener(v -> {
+            Intent intent = new Intent(context, CustomerOrderDetailActivity.class);
+            intent.putExtra("orderId", order.getId().toString());
+            context.startActivity(intent);
+        });
     }
 
     @Override
