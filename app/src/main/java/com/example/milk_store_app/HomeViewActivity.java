@@ -70,10 +70,17 @@ public class HomeViewActivity extends AppCompatActivity {
         btnSearch.setOnClickListener(v -> {
             loadProducts(search.getText().toString());
         });
-        btnCart.setOnClickListener(v -> {
-            Intent intent = new Intent(HomeViewActivity.this, CartViewActivity.class);
-            startActivity(intent);
-        });
+        if (sessionManager.isAdmin()) {
+            btnCart.setOnClickListener(v -> {
+                Intent intent = new Intent(HomeViewActivity.this, AddProductActivity.class);
+                startActivity(intent);
+            });
+        } else {
+            btnCart.setOnClickListener(v -> {
+                Intent intent = new Intent(HomeViewActivity.this, CartViewActivity.class);
+                startActivity(intent);
+            });
+        }
 
         btnOrderHistory.setOnClickListener(v -> {
             if (sessionManager.isCustomer()) {
@@ -108,8 +115,13 @@ public class HomeViewActivity extends AppCompatActivity {
         sessionManager = new SessionManager(this);
 
         if (sessionManager.isAdmin()) {
-            btnCart.setVisibility(View.GONE);
+            //btnCart.setVisibility(View.GONE);
             btnOrderHistory.setVisibility(View.GONE);
+            btnCart.setText("Add product");
+        }
+        if (sessionManager.isCustomer()) {
+            btnOrderHistory.setText("View order");
+            btnCart.setText("View cart");
         }
 
         loadProducts("");
