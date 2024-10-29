@@ -19,16 +19,26 @@ import com.example.milk_store_app.untils.DateTimeHelper;
 import com.example.milk_store_app.untils.NumberHelper;
 
 import java.time.LocalDateTime;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 import java.util.UUID;
 
 import lombok.AllArgsConstructor;
 
-@AllArgsConstructor
 public class OrderStaffAdapter extends RecyclerView.Adapter<OrderStaffAdapter.OrderStaffViewHolder> {
     private List<OrderResponse> orderList;
     private Context context;
     private int layout;
+
+
+    public OrderStaffAdapter(List<OrderResponse> orderList, Context context, int layout) {
+        this.orderList = orderList;
+        this.context = context;
+        this.layout = layout;
+
+
+    }
 
     @NonNull
     @Override

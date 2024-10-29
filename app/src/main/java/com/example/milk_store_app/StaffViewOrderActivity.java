@@ -20,6 +20,8 @@ import com.example.milk_store_app.repository.OrderRepository;
 import com.example.milk_store_app.services.OrderServices;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 import retrofit2.Call;
@@ -62,7 +64,7 @@ public class StaffViewOrderActivity extends AppCompatActivity {
     private void loadOrders() {
         orderServices.getOrders(
                 1,
-                10,
+                20,
                 "",
                 ""
         ).enqueue(new Callback<List<OrderResponse>>() {
@@ -72,6 +74,21 @@ public class StaffViewOrderActivity extends AppCompatActivity {
                     orderList.clear();
                     orderList.addAll(response.body());
                     adapter.notifyItemRangeInserted(0, orderList.size());
+                    Collections.sort(orderList, new Comparator<OrderResponse>() {
+                        @Override
+                        public int compare(OrderResponse o1, OrderResponse o2) {
+                            if ("Ordered".equals(o1.getOrderStatus()) && !"Ordered".equals(o2.getOrderStatus())) {
+                                return -1;
+                            } else if (!"Ordered".equals(o1.getOrderStatus()) && "Ordered".equals(o2.getOrderStatus())) {
+                                return 1;
+                            } else {
+                                return 0;
+                            }
+                        }
+                    });
+
+                    // Thông báo cho adapter cập nhật dữ liệu
+                    adapter.notifyDataSetChanged();
                 }
             }
 
