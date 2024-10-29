@@ -1,6 +1,7 @@
 package com.example.milk_store_app;
 
 import android.os.Bundle;
+import android.widget.Button;
 import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
@@ -31,6 +32,7 @@ public class StaffViewOrderActivity extends AppCompatActivity {
     List<OrderResponse> orderList;
     OrderStaffAdapter adapter;
     RecyclerView recyclerOrder;
+    Button Assign;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

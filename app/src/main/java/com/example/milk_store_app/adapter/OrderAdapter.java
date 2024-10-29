@@ -4,9 +4,11 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.milk_store_app.R;
@@ -41,6 +43,8 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.OrderViewHol
         holder.tvOrderDate.setText("Order Date: " + readableDate);
         holder.tvOrderTotal.setText("Order Total: " + NumberHelper.formatNumber(order.getTotalPrice()));
         holder.tvOrderStatus.setText("Order Status: " + order.getOrderStatus());
+
+
     }
 
     @Override
