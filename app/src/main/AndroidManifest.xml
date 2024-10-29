@@ -7,6 +7,9 @@
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
 
+    <uses-permission android:name="android.permission.MANAGE_EXTERNAL_STORAGE" />
+
+
     <application
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
@@ -25,6 +28,9 @@
             android:exported="false" />
         <activity
             android:name=".DeliveryViewActivity"
+            android:exported="false" />
+        <activity
+            android:name=".AddProductActivity"
             android:exported="false" />
         <activity
             android:name=".CartViewActivity"
