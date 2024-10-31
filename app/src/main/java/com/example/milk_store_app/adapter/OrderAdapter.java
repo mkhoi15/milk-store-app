@@ -38,7 +38,7 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.OrderViewHol
     @Override
     public void onBindViewHolder(@NonNull OrderViewHolder holder, int position) {
         OrderResponse order = orderList.get(position);
-        holder.tvOrderId.setText("Order: " + order.getOrderCode());
+        holder.tvOrderId.setText("Order: " + order.getId());
         LocalDateTime orderDate = DateTimeHelper.parseStringToLocalDateTime(order.getOrderDate());
         String readableDate = DateTimeHelper.formatLocalDateTimeToString(orderDate);
         holder.tvOrderDate.setText("Order Date: " + readableDate);
