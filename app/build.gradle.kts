@@ -39,6 +39,11 @@ dependencies {
         "include" to listOf("*.aar", "*.jar"),
         "exclude" to listOf("")
     )))
+    implementation(fileTree(mapOf(
+        "dir" to "D:\\Downloads",
+        "include" to listOf("*.aar", "*.jar"),
+        "exclude" to listOf("")
+    )))
     annotationProcessor(libs.androidx.room.compiler)
     implementation(libs.converter.scalars)
     implementation(libs.glide)

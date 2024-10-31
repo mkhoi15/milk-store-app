@@ -24,6 +24,9 @@
             android:name=".StaffAssignActivity"
             android:exported="false" />
         <activity
+            android:name=".CustomerOrderDetailActivity"
+            android:exported="false" />
+        <activity
             android:name=".OrderDeliveryDetailActivity"
             android:exported="false" />
         <activity

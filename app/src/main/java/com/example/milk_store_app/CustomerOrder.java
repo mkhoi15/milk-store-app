@@ -63,7 +63,7 @@ public class CustomerOrder extends Fragment {
         recyclerOrder = view.findViewById(R.id.recyclerViewOrders);
         orderServices = OrderRepository.getOrderServices(requireContext());
         orderList = new ArrayList<>();
-        adapter = new OrderAdapter(orderList, requireContext(), R.layout.activity_history_order_customer);
+        adapter = new OrderAdapter(orderList, requireContext(), R.layout.customer_order_item);
         recyclerOrder.setLayoutManager(new LinearLayoutManager(getContext()));
         recyclerOrder.setAdapter(adapter);
 
