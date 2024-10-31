@@ -138,14 +138,14 @@ public class CheckOutActivity extends AppCompatActivity {
 
                             @Override
                             public void onPaymentCanceled(String s, String s1) {
-                                Intent intent1 = new Intent(CheckOutActivity.this,HomeViewActivity.class);
+                                Intent intent1 = new Intent(CheckOutActivity.this,MainActivity.class);
                                 intent1.putExtra("result","hủy thanh toán thành công");
                                 startActivity(intent1);
                             }
 
                             @Override
                             public void onPaymentError(ZaloPayError zaloPayError, String s, String s1) {
-                                Intent intent1 = new Intent(CheckOutActivity.this,HomeViewActivity.class);
+                                Intent intent1 = new Intent(CheckOutActivity.this,MainActivity.class);
                                 intent1.putExtra("result","lỗi, thanh toán thất bại");
                                 startActivity(intent1);
                             }
@@ -259,7 +259,7 @@ public class CheckOutActivity extends AppCompatActivity {
 
     }
     private void navigateToHome(String message) {
-        Intent intent = new Intent(CheckOutActivity.this, HomeViewActivity.class);
+        Intent intent = new Intent(CheckOutActivity.this, MainActivity.class);
         intent.putExtra("result", message);
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
         startActivity(intent);

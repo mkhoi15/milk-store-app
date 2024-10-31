@@ -9,4 +9,7 @@
 
     <color name="button_selected">#FF8800</color> <!-- example selected color -->
     <color name="button_unselected">#CCCCCC</color> <!-- example unselected color -->
+    <color name="defaultFilterBackground">#FFFFFF</color> <!-- Default color -->
+    <color name="selectedFilterBackground">#E0F7FA</color> <!-- Lighter color for selected -->
+
 </resources>
