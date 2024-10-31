@@ -1,0 +1,29 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:padding="12dp"
+    android:background="?android:attr/selectableItemBackground"
+    android:gravity="center_vertical"
+    android:layout_marginBottom="4dp">
+
+    <TextView
+        android:id="@+id/textViewDeliveryName"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:text="Delivery Person"
+        android:textSize="16sp"
+        android:textColor="@android:color/black"
+        android:maxLines="1"
+        android:ellipsize="end"
+        android:paddingEnd="8dp" />
+
+    <Button
+        android:id="@+id/buttonSelectDelivery"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@color/button_selected"
+        android:textColor="@android:color/white"
+        android:text="Select" />
+</LinearLayout>

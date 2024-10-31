@@ -3,10 +3,8 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <uses-permission android:name="android.permission.INTERNET" />
-
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
-
     <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
 
     <uses-permission android:name="android.permission.MANAGE_EXTERNAL_STORAGE" />
@@ -23,6 +21,9 @@
         android:theme="@style/Theme.Milkstoreapp"
         tools:targetApi="31">
         <activity
+            android:name=".StaffAssignActivity"
+            android:exported="false" />
+        <activity
             android:name=".OrderDeliveryDetailActivity"
             android:exported="false" />
         <activity
@@ -38,7 +39,6 @@
             android:name=".PaymentNotification"
             android:exported="false" />
         <activity
-
             android:name=".ProductDetailActivity"
             android:exported="false" />
         <activity
@@ -60,11 +60,9 @@
             android:name=".CheckOutActivity"
             android:exported="true"
             android:label="Merchant Demo"
-            android:launchMode="singleTask"
-            >
+            android:launchMode="singleTask">
 
             <!-- Set CheckOutActivity as the launcher activity -->
-
 
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
@@ -92,11 +90,16 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="AIzaSyDx0cdpczo4VpfBHI4a0r7Fib1isMYrd3Y" />
-        <meta-data android:name="com.zalopay.sdk.APP_ID" android:value="2553" />
-        <meta-data android:name="com.zalopay.sdk.MAC_KEY" android:value="PcY4iZIKFCIdgZvA6ueMcMHHUbRLYjPL" />
+        <meta-data
+            android:name="com.zalopay.sdk.APP_ID"
+            android:value="2553" />
+        <meta-data
+            android:name="com.zalopay.sdk.MAC_KEY"
+            android:value="PcY4iZIKFCIdgZvA6ueMcMHHUbRLYjPL" />
     </application>
 
 </manifest>

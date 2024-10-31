@@ -18,6 +18,8 @@ public class OrderResponse {
     private String orderCode;
     private String orderDate;
     private String orderStatus;
+    private String customerName;
+
     private BigDecimal totalPrice;
     private String address;
     private String phoneNumber;

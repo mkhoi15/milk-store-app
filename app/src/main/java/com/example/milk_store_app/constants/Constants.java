@@ -11,6 +11,7 @@ public final class Constants {
 
     public static final String IMAGE_URL = "/api/images/upload";
     public static final String DELIVERY_URL = "/api/delivery";
+    public static final String Deliver_URL = "/delivery-man";
     public static final String BRAND_URL = "/api/brand";
 }
 
