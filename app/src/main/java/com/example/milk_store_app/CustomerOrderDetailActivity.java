@@ -3,6 +3,7 @@ package com.example.milk_store_app;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ImageButton;
@@ -50,6 +51,7 @@ public class CustomerOrderDetailActivity extends AppCompatActivity {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
+        ProjectData();
     }
 
     private void ProjectData(){
@@ -98,14 +100,14 @@ public class CustomerOrderDetailActivity extends AppCompatActivity {
 
     private void HandleButton(String status) {
         if (!status.equals("Delivered")){
-            btnAction2.setEnabled(false);
+            btnAction2.setVisibility(View.GONE);
             btnAction1.setEnabled(true);
 
             btnAction1.setText("Mua thêm");
             btnAction1.setOnClickListener(v -> {
                 // Handle button click for "Mua thêm"
-                Intent intent = new Intent(CustomerOrderDetailActivity.this, HomeViewActivity.class);
-                startActivity(intent);
+//                Intent intent = new Intent(CustomerOrderDetailActivity.this, HomeViewActivity.class);
+//                startActivity(intent);
                 finish();
             });
         } else {

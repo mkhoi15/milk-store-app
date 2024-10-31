@@ -15,10 +15,10 @@ import lombok.ToString;
 public class OrderItemListResponse{
     private int quantity;
     private BigDecimal price;
-    private String name;
+    private String productName;
 
     @Override
     public String toString() {
-        return name + " - " + quantity + " x " + price;
+        return productName + " - " + quantity + " x " + price;
     }
 }
