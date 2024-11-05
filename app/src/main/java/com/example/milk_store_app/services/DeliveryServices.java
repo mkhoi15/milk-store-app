@@ -34,4 +34,10 @@ public interface DeliveryServices {
     Call<DeliveryResponse> createOrderToDelivery(
             @Body CreateOrderRequest request
     );
+
+    @GET(Constants.DELIVERY_URL + "/{id}")
+    Call<DeliveryResponse> getDeliveryById(
+            @Path("id") @NonNull String deliveryId
+    );
+
 }
