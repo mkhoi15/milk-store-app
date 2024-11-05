@@ -47,7 +47,7 @@ public interface OrderServices {
     );
 
     @PUT(Constants.ORDER_URL + "/{id}")
-    Call<OrderResponse> updateOrder(
+    Call<OrderResponse> updateOrder2(
             @Path("id") String orderId,
             @Body OrderUpdateRequest request
     );

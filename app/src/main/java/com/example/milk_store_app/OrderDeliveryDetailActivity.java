@@ -89,6 +89,7 @@ public class OrderDeliveryDetailActivity extends AppCompatActivity {
             public void onClick(View view) {
                 String status = deliveryResponse.getOrder().getOrderStatus();
                 if ("Assigned".equalsIgnoreCase(status)) {
+
                     updateOrderStatus("Shipping");
                 } else if ("Shipping".equalsIgnoreCase(status)) {
                     updateOrderStatus("Delivered");
@@ -123,7 +124,7 @@ public class OrderDeliveryDetailActivity extends AppCompatActivity {
                 .phoneNumber(deliveryResponse.getOrder().getPhoneNumber()) // Use existing phone number
                 .build();
 
-        Call<OrderResponse> call = orderServices.updateOrder(deliveryResponse.getOrderId().toString(), request);
+        Call<OrderResponse> call = orderServices.updateOrder2(deliveryResponse.getOrderId().toString(), request);
         call.enqueue(new Callback<OrderResponse>() {
             @Override
             public void onResponse(Call<OrderResponse> call, Response<OrderResponse> response) {

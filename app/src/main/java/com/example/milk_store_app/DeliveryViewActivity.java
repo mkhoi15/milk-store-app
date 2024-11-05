@@ -156,6 +156,11 @@ public class DeliveryViewActivity extends AppCompatActivity {
         buttonDelivered.setOnClickListener(v -> selectButton(buttonDelivered, "Delivered"));
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        loadOrders();
+    }
 
     private void selectButton(Button button, String status) {
         // Reset color of previously selected button

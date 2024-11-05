@@ -135,7 +135,7 @@ public class CustomerOrderDetailActivity extends AppCompatActivity {
                     public void onResponse(Call<OrderResponse> call, Response<OrderResponse> response) {
                         if (response.isSuccessful() && response.body() != null) {
                             Toast.makeText(CustomerOrderDetailActivity.this, "Đã nhận đơn hàng", Toast.LENGTH_SHORT).show();
-                            Intent intent = new Intent(CustomerOrderDetailActivity.this, CustomerOrderHistoryActivity.class);
+                            Intent intent = new Intent(CustomerOrderDetailActivity.this, CustomerOrder.class);
                             startActivity(intent);
                             finish();
                         }
