@@ -62,11 +62,11 @@ public class ProductAdapter extends BaseAdapter {
             holder.tvDescriptionLeft = convertView.findViewById(R.id.product_description_left);
 
             // Right product views
-            holder.imgProductRight = convertView.findViewById(R.id.imgProductImgRight);
-            holder.tvProductNameRight = convertView.findViewById(R.id.product_name_right);
-            holder.tvStockRight = convertView.findViewById(R.id.product_stock_right);
-            holder.tvPriceRight = convertView.findViewById(R.id.product_price_right);
-            holder.tvDescriptionRight = convertView.findViewById(R.id.product_description_right);
+//            holder.imgProductRight = convertView.findViewById(R.id.imgProductImgRight);
+//            holder.tvProductNameRight = convertView.findViewById(R.id.product_name_right);
+//            holder.tvStockRight = convertView.findViewById(R.id.product_stock_right);
+//            holder.tvPriceRight = convertView.findViewById(R.id.product_price_right);
+//            holder.tvDescriptionRight = convertView.findViewById(R.id.product_description_right);
 
             convertView.setTag(holder);
         } else {
@@ -74,29 +74,29 @@ public class ProductAdapter extends BaseAdapter {
         }
 
         // Bind the left product in the row
-        ProductResponse leftProduct = productList.get(position * 2);
+        ProductResponse leftProduct = productList.get(position);
         bindProduct(holder.imgProductLeft, holder.tvProductNameLeft, holder.tvStockLeft,
                 holder.tvPriceLeft, holder.tvDescriptionLeft, leftProduct);
 
         // Bind the right product if it exists
-        if (position * 2 + 1 < productList.size()) {
-            ProductResponse rightProduct = productList.get(position * 2 + 1);
-            bindProduct(holder.imgProductRight, holder.tvProductNameRight, holder.tvStockRight,
-                    holder.tvPriceRight, holder.tvDescriptionRight, rightProduct);
-
-            holder.imgProductRight.setVisibility(View.VISIBLE);
-            holder.tvProductNameRight.setVisibility(View.VISIBLE);
-            holder.tvStockRight.setVisibility(View.VISIBLE);
-            holder.tvPriceRight.setVisibility(View.VISIBLE);
-            holder.tvDescriptionRight.setVisibility(View.VISIBLE);
-        } else {
-            // Hide the right product views if no right product exists
-            holder.imgProductRight.setVisibility(View.INVISIBLE);
-            holder.tvProductNameRight.setVisibility(View.INVISIBLE);
-            holder.tvStockRight.setVisibility(View.INVISIBLE);
-            holder.tvPriceRight.setVisibility(View.INVISIBLE);
-            holder.tvDescriptionRight.setVisibility(View.INVISIBLE);
-        }
+//        if (position * 2 + 1 < productList.size()) {
+//            ProductResponse rightProduct = productList.get(position * 2 + 1);
+//            bindProduct(holder.imgProductRight, holder.tvProductNameRight, holder.tvStockRight,
+//                    holder.tvPriceRight, holder.tvDescriptionRight, rightProduct);
+//
+//            holder.imgProductRight.setVisibility(View.VISIBLE);
+//            holder.tvProductNameRight.setVisibility(View.VISIBLE);
+//            holder.tvStockRight.setVisibility(View.VISIBLE);
+//            holder.tvPriceRight.setVisibility(View.VISIBLE);
+//            holder.tvDescriptionRight.setVisibility(View.VISIBLE);
+//        } else {
+//            // Hide the right product views if no right product exists
+//            holder.imgProductRight.setVisibility(View.INVISIBLE);
+//            holder.tvProductNameRight.setVisibility(View.INVISIBLE);
+//            holder.tvStockRight.setVisibility(View.INVISIBLE);
+//            holder.tvPriceRight.setVisibility(View.INVISIBLE);
+//            holder.tvDescriptionRight.setVisibility(View.INVISIBLE);
+//        }
 
         return convertView;
     }
