@@ -34,6 +34,16 @@ android {
 
 dependencies {
     implementation(libs.androidx.room.runtime)
+    implementation(fileTree(mapOf(
+        "dir" to "D:\\Download",
+        "include" to listOf("*.aar", "*.jar"),
+        "exclude" to listOf("")
+    )))
+    implementation(fileTree(mapOf(
+        "dir" to "D:\\Downloads",
+        "include" to listOf("*.aar", "*.jar"),
+        "exclude" to listOf("")
+    )))
     annotationProcessor(libs.androidx.room.compiler)
     implementation(libs.converter.scalars)
     implementation(libs.glide)
@@ -47,6 +57,9 @@ dependencies {
     implementation(libs.constraintlayout)
     implementation("com.squareup.okhttp3:okhttp:4.6.0")
     implementation("commons-codec:commons-codec:1.14")
+    implementation("com.google.android.gms:play-services-maps:18.0.2")
+    implementation("com.google.android.gms:play-services-location:21.0.1")
+
 
     implementation(fileTree(mapOf(
         "dir" to "D:\\LabPRM\\ZPDK_ANdroid",

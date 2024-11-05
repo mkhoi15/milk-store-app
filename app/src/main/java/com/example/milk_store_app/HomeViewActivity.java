@@ -53,7 +53,7 @@ public class HomeViewActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
-        setContentView(R.layout.activity_home_view);
+        setContentView(R.layout.fragment_customer_home);
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
@@ -70,10 +70,17 @@ public class HomeViewActivity extends AppCompatActivity {
         btnSearch.setOnClickListener(v -> {
             loadProducts(search.getText().toString());
         });
-        btnCart.setOnClickListener(v -> {
-            Intent intent = new Intent(HomeViewActivity.this, CartViewActivity.class);
-            startActivity(intent);
-        });
+        if (sessionManager.isAdmin()) {
+            btnCart.setOnClickListener(v -> {
+                Intent intent = new Intent(HomeViewActivity.this, AddProductActivity.class);
+                startActivity(intent);
+            });
+        } else {
+            btnCart.setOnClickListener(v -> {
+                Intent intent = new Intent(HomeViewActivity.this, CartViewActivity.class);
+                startActivity(intent);
+            });
+        }
 
         btnOrderHistory.setOnClickListener(v -> {
             if (sessionManager.isCustomer()) {
@@ -101,15 +108,19 @@ public class HomeViewActivity extends AppCompatActivity {
         btnSearch = (Button) findViewById(R.id.btn_search);
         btnCart = (Button) findViewById(R.id.btn_cart);
         listView.setAdapter(adapter);
-        btnOrderHistory = (Button) findViewById(R.id.btn_order_history);
 
         productServices = ProductRepository.getProductServices(this);
         cartManager = new CartManager(this);
         sessionManager = new SessionManager(this);
 
         if (sessionManager.isAdmin()) {
-            btnCart.setVisibility(View.GONE);
+            //btnCart.setVisibility(View.GONE);
             btnOrderHistory.setVisibility(View.GONE);
+            btnCart.setText("Add product");
+        }
+        if (sessionManager.isCustomer()) {
+            btnOrderHistory.setText("View order");
+            btnCart.setText("View cart");
         }
 
         loadProducts("");

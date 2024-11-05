@@ -1,6 +1,7 @@
 package com.example.milk_store_app.models.response;
 
 import java.math.BigDecimal;
+import java.util.List;
 import java.util.UUID;
 
 import lombok.AllArgsConstructor;
@@ -12,15 +13,15 @@ import lombok.Setter;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class OrderResponse {
+public class OrderDetailResponse {
     private UUID id;
     private UUID userId;
     private String orderCode;
     private String orderDate;
     private String orderStatus;
-    private String customerName;
-
     private BigDecimal totalPrice;
     private String address;
     private String phoneNumber;
+    private List<OrderItemListResponse> orderDetails;
 }
+

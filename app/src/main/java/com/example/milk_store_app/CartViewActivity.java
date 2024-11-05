@@ -4,7 +4,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.ListView;
-import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -14,20 +13,12 @@ import androidx.core.view.WindowInsetsCompat;
 
 import com.example.milk_store_app.adapter.CartAdapter;
 import com.example.milk_store_app.models.entities.CartItems;
-import com.example.milk_store_app.models.entities.OrderItem;
-import com.example.milk_store_app.models.request.PostOrderRequest;
 import com.example.milk_store_app.repository.OrderRepository;
 import com.example.milk_store_app.services.OrderServices;
 import com.example.milk_store_app.session.CartManager;
 import com.example.milk_store_app.session.SessionManager;
 
 import java.util.ArrayList;
-import java.util.List;
-
-import lombok.AllArgsConstructor;
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
 
 
 public class CartViewActivity extends AppCompatActivity {
