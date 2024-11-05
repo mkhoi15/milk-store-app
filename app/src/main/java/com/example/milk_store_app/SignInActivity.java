@@ -67,7 +67,6 @@ public class SignInActivity extends AppCompatActivity implements View.OnClickLis
     private void signUp(){
         Intent intent = new Intent(this, SignUpActivity.class);
         startActivity(intent);
-        finish();
     }
     @Override
     public void onClick(View view) {

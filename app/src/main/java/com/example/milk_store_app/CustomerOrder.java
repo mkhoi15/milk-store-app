@@ -94,7 +94,7 @@ public class CustomerOrder extends Fragment {
 
     private void loadOrders(String orderStatus) {
         String userId = sessionManager.fetchUserId();
-        orderServices.getOrdersByUserId("de3cbdbd-9142-4c9f-aeae-de1f286197af", 1, 10, orderStatus, "orderStatus")
+        orderServices.getOrdersByUserId(userId, 1, 10, orderStatus, "orderStatus")
                 .enqueue(new Callback<List<OrderResponse>>() {
                     @Override
                     public void onResponse(Call<List<OrderResponse>> call, Response<List<OrderResponse>> response) {

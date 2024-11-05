@@ -16,5 +16,5 @@ public interface AuthService {
     Call<ResponseBody> login(@Body LoginRequest loginRequest);
 
     @POST(Constants.REGISTER_URL)
-    Call<RegisterResponse> register(@Body RegisterRequest registerResRequest);
+    Call<Void> register(@Body RegisterRequest registerResRequest);
 }

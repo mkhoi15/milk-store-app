@@ -36,6 +36,7 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
     EditText userName;
     EditText password;
     EditText confirmPassword;
+    EditText fullName, phoneNumber, email;
     TextView signIn;
     Button signUpButton;
     AuthService authService;
@@ -51,6 +52,9 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
         confirmPassword = findViewById(R.id.confirm_password);
         signIn = findViewById(R.id.signIn);
         signUpButton = findViewById(R.id.signUpButton);
+        fullName = findViewById(R.id.full_name);
+        phoneNumber = findViewById(R.id.phone_number);
+        email = findViewById(R.id.email);
 
         authService = AuthRepository.getAuthService(this);
 
@@ -106,24 +110,28 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
 
         registerRequest.setUsername(userName.getText().toString());
         registerRequest.setPassword(password.getText().toString());
+        registerRequest.setEmail(email.getText().toString());
+        registerRequest.setFullName(fullName.getText().toString());
+        registerRequest.setPhoneNumber(phoneNumber.getText().toString());
+        registerRequest.setRole(4);
 
-        Call<RegisterResponse> registerResponseCall = authService.register(registerRequest);
+        Call<Void> registerResponseCall = authService.register(registerRequest);
 
-        registerResponseCall.enqueue(new Callback<RegisterResponse>() {
+        registerResponseCall.enqueue(new Callback<Void>() {
             @Override
-            public void onResponse(Call<RegisterResponse> call, Response<RegisterResponse> response) {
+            public void onResponse(Call<Void> call, Response<Void> response) {
                 if (response.isSuccessful()) {
                     // Show success dialog
-                    assert response.body() != null;
-                    showSuccessDialog(response.body().getMessage());
+                    Toast.makeText(SignUpActivity.this, "Register success", Toast.LENGTH_SHORT).show();
+                    finish();
                 } else {
                     // Show error dialog
-                    handleError(response);
+                    Toast.makeText(SignUpActivity.this, "Register failed", Toast.LENGTH_SHORT).show();
                 }
             }
 
             @Override
-            public void onFailure(Call<RegisterResponse> call, Throwable t) {
+            public void onFailure(Call<Void> call, Throwable t) {
                 Toast.makeText(SignUpActivity.this, "Register failed", Toast.LENGTH_SHORT).show();
             }
         });
