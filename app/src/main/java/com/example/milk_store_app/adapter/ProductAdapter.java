@@ -59,7 +59,6 @@ public class ProductAdapter extends BaseAdapter {
             holder.tvProductNameLeft = convertView.findViewById(R.id.product_name_left);
             holder.tvStockLeft = convertView.findViewById(R.id.product_stock_left);
             holder.tvPriceLeft = convertView.findViewById(R.id.product_price_left);
-            holder.tvDescriptionLeft = convertView.findViewById(R.id.product_description_left);
 
             // Right product views
 //            holder.imgProductRight = convertView.findViewById(R.id.imgProductImgRight);
@@ -76,7 +75,7 @@ public class ProductAdapter extends BaseAdapter {
         // Bind the left product in the row
         ProductResponse leftProduct = productList.get(position);
         bindProduct(holder.imgProductLeft, holder.tvProductNameLeft, holder.tvStockLeft,
-                holder.tvPriceLeft, holder.tvDescriptionLeft, leftProduct);
+                holder.tvPriceLeft, leftProduct);
 
         // Bind the right product if it exists
 //        if (position * 2 + 1 < productList.size()) {
@@ -102,7 +101,7 @@ public class ProductAdapter extends BaseAdapter {
     }
 
     private void bindProduct(ImageView imgProduct, TextView tvProductName, TextView tvStock,
-                             TextView tvPrice, TextView tvDescription, ProductResponse product) {
+                             TextView tvPrice, ProductResponse product) {
         if (product.getImageUrl() != null && !product.getImageUrl().isEmpty()) {
             Glide.with(context)
                     .load(product.getImageUrl())
@@ -117,7 +116,5 @@ public class ProductAdapter extends BaseAdapter {
 
         String priceFormatted = String.format(context.getResources().getString(R.string.product_price), NumberHelper.formatNumber(product.getPrice()));
         tvPrice.setText(priceFormatted);
-
-        tvDescription.setText(product.getDescription());
     }
 }
